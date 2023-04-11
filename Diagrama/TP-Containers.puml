@@ -1,0 +1,90 @@
+@startuml
+
+title ** Diseño TP **
+
+class Barco{
+   - id
+   - maxConteiners
+   - maxPeso
+
+   + getId(): String 
+   + setId(String): void
+   + getMaxConteiners()
+   + setMaxConteiners(Integer): void
+   + getMaxPeso(): Double
+   + setMaxPeso(Double): void
+
+   + cargar()
+   + descargar()
+}
+
+Barco <|-- BarcoBasico
+Barco <|-- BarcoCompleto
+Barco o-- Contenedor
+
+class BarcoBasico{
+
+}
+
+class BarcoCompleto{
+
+}
+
+class Camion{
+   - patente 
+
+   + getPatente(): String
+   + setPatente(String): void
+}
+
+Camion o-- Contenedor
+
+abstract Class Contenedor{
+   - id
+   - exterior
+   - interior
+   - maxPeso
+   - maxVolumen
+   
+   + getId(): String 
+   + setId(String): void
+   + getExterior(): Exterior
+   + setExterior(Exterior): void
+   + getInterior(): Interior
+   + getMaxPeso(): Double
+   + setMaxPeso(Double): void
+   + getMaxVolumen(): Double
+   + setMaxVolumen(Double): void 
+}
+
+Contenedor <|-- Basico
+Contenedor <|-- BasicoHC
+Contenedor <|-- FlatRack
+Contenedor <-- Exterior
+Contenedor <-- Interior
+
+Class Basico{
+
+}
+
+Class BasicoHC{
+
+} 
+
+Class FlatRack{
+
+}
+
+Class Exterior{
+   - exteriorAncho
+   - exteriorAlto
+   - exteriorLargo
+}
+
+Class Interior{
+   - interiorAlto
+   - interiorAncho
+   - interiorLargo
+}
+
+@enduml
