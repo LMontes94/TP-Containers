@@ -7,6 +7,9 @@ class Barco{
    - maxConteiners: Integer
    - maxPeso : Double 
    - conteiner : ArrayList<Contenedor>
+   - sedeInicial
+   - sedeFinal 
+   - kmRecorridos 
 
    + getId(): Integer 
    + setId(Integer): void
@@ -22,7 +25,7 @@ class Barco{
 }
 
 Barco <|-- BarcoBasico
-Barco o-- Contenedor
+Barco <-- Contenedor
 
 class BarcoBasico{
 
@@ -33,7 +36,6 @@ class BarcoCompleto{
 }
 
 class Camion{
-   - MAX_CAMIONES : 5
    - patente: String 
    - costoFijo : double 20000 
    - conteiner : Contenedor 
@@ -52,14 +54,15 @@ class Camion{
 Camion <-- Contenedor
 
 abstract Class Contenedor{
-   - id
-   - exterior
-   - interior
-   - pies 
-   - maxPeso
-   - maxVolumen
-   - precioBase
-   
+   - id: Integer 
+   - exterior: Exterior
+   - interior: Interior 
+   - pies: Integer 
+   - maxPeso: Double 
+   - maxVolumen: Double 
+   - precioBase: Double
+   - hayEspacio : boolean 
+
    + getId(): String 
    + setId(String): void
    + getExterior(): Exterior
@@ -71,6 +74,7 @@ abstract Class Contenedor{
    + setMaxVolumen(Double): void 
 
    + calcularPrecio(): Double 
+   + calcularEspacio(): 
 }
 
 
@@ -108,10 +112,31 @@ Class Interior{
    - interiorLargo
 }
 
+class Cliente{
+   - nombre
+   - dni
+   - nroCliente 
+
+}
+
+class Despacho{
+   - Cliente : Cliente 
+   - retiro: boolean 
+   - conteinerCompleto: boolean  
+   - Container  
+   - Barcos: ArrayList<Barco>
+   - Camiones: ArrayList<Camion>
+}
+
+Despacho <-- Cliente
+Despacho o-- Camion
+Despacho <-- Barco
+Despacho <-- Contenedor
 
 class Dudas{ 
    - Conteiner Especial aparte o tipo ?¡?¡
    - Mecanica gruas, hay que separar??
-   -  
+   - Completa un cliente o varios
+   -
 }
 @enduml
