@@ -1,0 +1,10 @@
+@startuml
+
+Cliente -> Empresa : pedirViaje()
+Empresa -> Barco : verificarBarco()
+Barco -> Contenedor: puedeLlevarConteiner()
+Contenedor -> Barco: subeContenedor()
+Barco -> Barco: Viaja
+Barco -> Empresa: llegaSede()
+
+@enduml

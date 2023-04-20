@@ -25,6 +25,7 @@ class Barco{
 }
 
 Barco <|-- BarcoBasico
+Barco <|-- BarcoCompleto
 Barco <-- Contenedor
 
 class BarcoBasico{
@@ -55,8 +56,8 @@ Camion <-- Contenedor
 
 abstract Class Contenedor{
    - id: Integer 
-   - exterior: Exterior
-   - interior: Interior 
+   - exterior: Medida 
+   - interior: Medida  
    - pies: Integer 
    - maxPeso: Double 
    - maxVolumen: Double 
@@ -72,7 +73,11 @@ abstract Class Contenedor{
    + setMaxPeso(Double): void
    + getMaxVolumen(): Double
    + setMaxVolumen(Double): void 
-
+   + getPrecioBase(): Double
+   + setPrecioBase(Double): void
+   + getPies(): Integer 
+   + setPies(Integer): void 
+   
    + calcularPrecio(): Double 
    + calcularEspacio(): 
 }
@@ -81,8 +86,10 @@ abstract Class Contenedor{
 Contenedor <|-- Basico
 Contenedor <|-- BasicoHC
 Contenedor <|-- FlatRack
-Contenedor <-- Exterior
-Contenedor <-- Interior
+Contenedor <|-- ContenedorEspecial
+Contenedor <-- Medida
+Medida <|-- Exterior 
+Medida <|-- Interior
 
 Class Basico{
 
@@ -100,22 +107,30 @@ class ContenedorEspecial{
    duda???
 }
 
-Class Exterior{
-   - exteriorAncho
-   - exteriorAlto
-   - exteriorLargo
-}
-
-Class Interior{
-   - interiorAlto
-   - interiorAncho
-   - interiorLargo
+Class Medida{
+   - ancho: Double 
+   - alto: Double 
+   - largo: Double 
+  
+   + getAncho(): Double 
+   + setAncho(Double): void
+   + getLargo(): Double 
+   + setLargo(Double): void 
+   + getAlto(): Double 
+   + setAlto(Double): void
 }
 
 class Cliente{
    - nombre
    - dni
    - nroCliente 
+   
+   + getNombre(): String 
+   + setNombre(String): void
+   + getDni(): Integer 
+   + setDni(Integer): void
+   + getNroCliente(): Integer 
+   + setNroCliente(Integer): void
 
 }
 
@@ -123,9 +138,15 @@ class Despacho{
    - Cliente : Cliente 
    - retiro: boolean 
    - conteinerCompleto: boolean  
-   - Container  
+   - Container : Container 
    - Barcos: ArrayList<Barco>
    - Camiones: ArrayList<Camion>
+
+   + getCliente(): Cliente 
+   + setCliente(Cliente): void
+   + setRetiro(boolean): void
+   + setConteinerCompleto(boolean): void
+   + getRetiro(): boolean
 }
 
 Despacho <-- Cliente
