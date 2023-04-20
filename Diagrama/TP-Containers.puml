@@ -3,23 +3,25 @@
 title ** Diseño TP **
 
 class Barco{
-   - id
-   - maxConteiners
-   - maxPeso
+   - id: Integer
+   - maxConteiners: Integer
+   - maxPeso : Double 
+   - conteiner : ArrayList<Contenedor>
 
-   + getId(): String 
-   + setId(String): void
-   + getMaxConteiners()
+   + getId(): Integer 
+   + setId(Integer): void
+   + getMaxConteiners(): Integer 
    + setMaxConteiners(Integer): void
    + getMaxPeso(): Double
    + setMaxPeso(Double): void
-
-   + cargar()
+   + getContenedor(): Contenedor
+   + setContenedor(Contenedor): void
+   
+   + cargar() 'valida carga segun tipo de contenedor
    + descargar()
 }
 
 Barco <|-- BarcoBasico
-Barco <|-- BarcoCompleto
 Barco o-- Contenedor
 
 class BarcoBasico{
@@ -31,20 +33,32 @@ class BarcoCompleto{
 }
 
 class Camion{
-   - patente 
+   - MAX_CAMIONES : 5
+   - patente: String 
+   - costoFijo : double 20000 
+   - conteiner : Contenedor 
 
    + getPatente(): String
    + setPatente(String): void
+   + getCostoFijo(): Double 
+   + setCostoFijo(Double): void
+   + getContenedor(): Contenedor
+   + setContenedor(Contenedor): void
+
+   + llevaConteiner(): boolean
+   + calcularMonto(): Double
 }
 
-Camion o-- Contenedor
+Camion <-- Contenedor
 
 abstract Class Contenedor{
    - id
    - exterior
    - interior
+   - pies 
    - maxPeso
    - maxVolumen
+   - precioBase
    
    + getId(): String 
    + setId(String): void
@@ -55,7 +69,10 @@ abstract Class Contenedor{
    + setMaxPeso(Double): void
    + getMaxVolumen(): Double
    + setMaxVolumen(Double): void 
+
+   + calcularPrecio(): Double 
 }
+
 
 Contenedor <|-- Basico
 Contenedor <|-- BasicoHC
@@ -75,6 +92,10 @@ Class FlatRack{
 
 }
 
+class ContenedorEspecial{
+   duda???
+}
+
 Class Exterior{
    - exteriorAncho
    - exteriorAlto
@@ -87,4 +108,10 @@ Class Interior{
    - interiorLargo
 }
 
+
+class Dudas{ 
+   - Conteiner Especial aparte o tipo ?¡?¡
+   - Mecanica gruas, hay que separar??
+   -  
+}
 @enduml
