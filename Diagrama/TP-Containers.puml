@@ -160,4 +160,8 @@ class Dudas{
    - Completa un cliente o varios
    -
 }
+
+note as n1 
+ Dudas x 
+end note
 @enduml
