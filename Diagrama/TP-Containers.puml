@@ -24,9 +24,6 @@ class Barco{
    + descargar()
 }
 
-Barco <|-- BarcoBasico
-Barco <|-- BarcoCompleto
-Barco <-- Contenedor
 
 class BarcoBasico{
 
@@ -35,6 +32,10 @@ class BarcoBasico{
 class BarcoCompleto{
 
 }
+
+Barco <|-- BarcoBasico
+Barco <|-- BarcoCompleto
+Barco <-- Contenedor
 
 class Camion{
    - patente: String 
@@ -63,6 +64,7 @@ abstract Class Contenedor{
    - maxVolumen: Double 
    - precioBase: Double
    - hayEspacio : boolean 
+   - esEspecial : boolean
 
    + getId(): String 
    + setId(String): void
@@ -77,6 +79,8 @@ abstract Class Contenedor{
    + setPrecioBase(Double): void
    + getPies(): Integer 
    + setPies(Integer): void 
+   + isEspecial(): boolean
+   + setisEspecial(boolean): void 
    
    + calcularPrecio(): Double 
    + calcularEspacio(): 
@@ -86,7 +90,7 @@ abstract Class Contenedor{
 Contenedor <|-- Basico
 Contenedor <|-- BasicoHC
 Contenedor <|-- FlatRack
-Contenedor <|-- ContenedorEspecial
+
 Contenedor <-- Medida
 Medida <|-- Exterior 
 Medida <|-- Interior
@@ -103,9 +107,6 @@ Class FlatRack{
 
 }
 
-class ContenedorEspecial{
-   duda???
-}
 
 Class Medida{
    - ancho: Double 
