@@ -2,7 +2,7 @@
 
 title ** Diseño TP **
 
-class Barco{
+abstract class Barco{
    - id: Integer
    - maxConteiners: Integer
    - maxPeso : Double 
@@ -10,6 +10,9 @@ class Barco{
    - sedeInicial
    - sedeFinal 
    - kmRecorridos 
+   - kmTotal
+   - esEspecial: boolean 
+   - pesoActual: Double 
 
    + getId(): Integer 
    + setId(Integer): void
@@ -19,28 +22,16 @@ class Barco{
    + setMaxPeso(Double): void
    + getContenedor(): Contenedor
    + setContenedor(Contenedor): void
-   
-   + cargar() 'valida carga segun tipo de contenedor
+   + sumaKmRecorridos(): Double 
    + descargar()
-}
-
-
-class BarcoBasico{
 
 }
-
-class BarcoCompleto{
-
-}
-
-Barco <|-- BarcoBasico
-Barco <|-- BarcoCompleto
-Barco <-- Contenedor
 
 class Camion{
    - patente: String 
    - costoFijo : double 20000 
    - conteiner : Contenedor 
+   - ocupado: boolean 
 
    + getPatente(): String
    + setPatente(String): void
@@ -50,10 +41,7 @@ class Camion{
    + setContenedor(Contenedor): void
 
    + llevaConteiner(): boolean
-   + calcularMonto(): Double
 }
-
-Camion <-- Contenedor
 
 abstract Class Contenedor{
    - id: Integer 
@@ -65,6 +53,10 @@ abstract Class Contenedor{
    - precioBase: Double
    - hayEspacio : boolean 
    - esEspecial : boolean
+   - mercaderia: ArrayList<Mercaderia>
+   - pesoActual : Double 
+   - volumenActual: Double 
+   - cantidadCargaCompleta: Integer 
 
    + getId(): String 
    + setId(String): void
@@ -80,33 +72,10 @@ abstract Class Contenedor{
    + getPies(): Integer 
    + setPies(Integer): void 
    + isEspecial(): boolean
-   + setisEspecial(boolean): void 
-   
-   + calcularPrecio(): Double 
+   + setIsEspecial(boolean): void 
    + calcularEspacio(): 
+   + validarCargaCompletaUnica(): void 
 }
-
-
-Contenedor <|-- Basico
-Contenedor <|-- BasicoHC
-Contenedor <|-- FlatRack
-
-Contenedor <-- Medida
-Medida <|-- Exterior 
-Medida <|-- Interior
-
-Class Basico{
-
-}
-
-Class BasicoHC{
-
-} 
-
-Class FlatRack{
-
-}
-
 
 Class Medida{
    - ancho: Double 
@@ -125,7 +94,9 @@ class Cliente{
    - nombre
    - dni
    - nroCliente 
-   
+   - mercaderia: ArrayList<Mercaderia>
+   - servicioAPuerta: boolean 
+
    + getNombre(): String 
    + setNombre(String): void
    + getDni(): Integer 
@@ -136,33 +107,97 @@ class Cliente{
 }
 
 class Despacho{
+   - MAX_CAMIONES = 5
    - Cliente : Cliente 
    - retiro: boolean 
    - conteinerCompleto: boolean  
    - Container : Container 
    - Barcos: ArrayList<Barco>
-   - Camiones: ArrayList<Camion>
+   - Camiones: ArrayList[MAX_CAMIONES]
 
    + getCliente(): Cliente 
    + setCliente(Cliente): void
    + setRetiro(boolean): void
    + setConteinerCompleto(boolean): void
    + getRetiro(): boolean
+   + obtenerPrecio():
+   + conteinerMayorViajeCompleto(): Conteiner 
+   + barcoMaxKms(): Barco 
+   + barcoMinKms(): Barco 
+   + cargarBarco(Contenier): void 
+   + cargarConteiner(Mercaderia): void 
 }
 
+class Mercaderia{
+   - id : Integer 
+   - nombre : String 
+   - peso : Double 
+   - volumen : Double 
+   - medida : Medida
+   - esEspecial: boolean 
+}
+
+' Relaciones 
+
+Barco <|-- BarcoBasico
+Barco <|-- BarcoEspecializado
+Barco <-- Contenedor
+
+Contenedor <|-- Basico
+Contenedor <|-- BasicoHC
+Contenedor <|-- FlatRack
+Contenedor <-- Medida
+
+Camion <-- Contenedor
+
+Medida <|-- Exterior 
+Medida <|-- Interior
 Despacho <-- Cliente
 Despacho o-- Camion
 Despacho <-- Barco
 Despacho <-- Contenedor
 
-class Dudas{ 
+Cliente *-- Mercaderia
+
+'Notas
+
+note as n1 
+   - Cuando sale un conteiner??
    - Conteiner Especial aparte o tipo ?¡?¡
    - Mecanica gruas, hay que separar??
    - Completa un cliente o varios
-   -
-}
-
-note as n1 
- Dudas x 
+   - como usar diccionarios
 end note
+
+note left of Despacho::cargarBarco
+  Verifica el maxConteiners
+  calcular el total de peso de los conteiners (Se puede usar otro metodo)
+  Dependiendo del tipo de conteiner lo deriva al barco correspondiente
+  usar append()
+end note 
+
+note left of Despacho::cargarConteiner
+   Recibe mercaderia del cliente
+   verifica si tiene espacio el conteiner (peso y medidas)
+   Dependiendo la verificacion anterior lo deribe a distintos conteiners 
+end note 
+
+
+note right of Barco::sumaKmRecorridos
+  Usa el GPS, y adentro del metodo descargar
+  llamar a esta funcion.
+
+end note
+
+note left of Despacho::obtenerPrecio
+  return preciobase + tabla de precios + km que
+   trae del barco
+end note 
+
+note left of Contenedor::validarCargaCompletaUnica
+  recorre los id de las mercancias, si es el mismo 
+  y si lo completo. Y lo setea en cantidadCargaCompleta
+end note
+
+
 @enduml
