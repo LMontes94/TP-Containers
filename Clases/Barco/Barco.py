@@ -1,15 +1,19 @@
 from Contenedores import Contenedor
-from abc import ABC
+from abc import ABC , abstractmethod
 
-class Barco:
+class Barco(ABC):
 
-    id=0
-    max_Containers=0
-    max_Peso=0.0
-    conteiner = list (Contenedor())
-    sede_Inicial=''
-    sede_Final=''
-    km_Recorridos=0.0
+    def __init__(self):
+        self.id=0
+        self.max_Containers=0
+        self.max_Peso=0.0
+        self.conteiner = list (Contenedor())
+        self.sede_Inicial=''
+        self.sede_Final=''
+        self.km_Recorridos=0.0
+        self.km_Total=0.0
+        self.es_Especial=False
+        self.peso_Actual=0.0
 
 
 
@@ -80,17 +84,44 @@ class Barco:
 
     km_Recorridos= property(get_km_Recorridos,set_km_Recorridos)    
 
+#getters y setters kmsTotal
+    def get_km_Total(self):
+        return self.km_Total
+    
+    def set_km_Total(self,valor):
+        self.km_Total=valor
+
+    km_Total= property(get_km_Total,set_km_Total)    
+
+#getters y setters es_Especial
+    def get_es_Especial(self):
+        return self.es_Especial
+    
+    def set_es_Especial(self,valor):
+        self.es_Especial=valor
+
+    es_Especial= property(get_es_Especial,set_es_Especial)    
+
+    #getters y setters pesoActual
+
+    def get_peso_Actual(self):
+        return self.peso_Actual
+    def set_peso_Actual(self,valor):
+        self.peso_Actual=valor
+    peso_Actual=property(get_peso_Actual,set_peso_Actual)    
+
+
 #--------Getters & Setters-----------------   
 #  ...........................
 #-----------Funciones-----------
 
     @abstractmethod
-    def cargar(self):
-        return 0
+    def sumaKmRecorridos(self):
+        pass
 
     @abstractmethod
     def descargar(self):
-        return 0
+        pass
 
 
 
