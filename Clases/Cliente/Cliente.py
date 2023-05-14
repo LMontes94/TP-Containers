@@ -1,34 +1,35 @@
+from Mercaderia import Mercaderia
+
 class Cliente:
-
-    nombre=''
-    dni=0
-    nro_Cliente=0
-
-
-#---------- Getters & Setters ----------
-
-#Getters & setters de nombre
-
-    def get_nombre(self):
+    #Constructor
+    def __init__(self, nombre, dni, nroCliente):
+        self.nombre = nombre
+        self.dni = dni
+        self.nroCliente = nroCliente
+        self.mercaderia = []
+        self.servicioAPuerta = False
+    #Getters && Setters
+    def getNombre(self):
         return self.nombre
-    def set_nombre(self,valor):
-        self.nombre=valor
-    nombre=property(get_nombre,set_nombre)
+    def setNombre(self, nombre):
+        self.nombre = nombre
 
-#Getters & setters de dni
-
-    def get_dni(self):
+    def getDni(self):
         return self.dni
-    def set_dni(self,valor):
-        self.dni=valor
-    dni=property(get_dni,set_dni)
+    def setDni(self, dni):
+        self.dni = dni
 
-#Getters & setters de nroCliente
+    def getNroCliente(self):
+        return self.nroCliente
+    def setNroCliente(self, nroCliente):
+        self.nroCliente = nroCliente
 
-    def get_nro_Cliente(self):
-        return self.nro_Cliente
-    def set_nro_Cliente(self,valor):
-        self.nro_Cliente=valor
-    nro_Cliente=property(get_nro_Cliente,set_nro_Cliente)
+    def getMercaderia(self):
+        return self.mercaderia
+    def agregarMercaderia(self, mercaderia: Mercaderia):
+        self.mercaderia.append(mercaderia)
 
-#---------- Getters & Setters ----------
+    def tieneServicioAPuerta(self):
+        return self.servicioAPuerta
+    def setServicioAPuerta(self, servicioAPuerta):
+        self.servicioAPuerta = servicioAPuerta
