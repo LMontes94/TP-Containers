@@ -1,40 +1,26 @@
 from Contenedores import Contenedor
+
 class Camion:
-    
-    patente=''
-    costo_Fijo=20000.00
-    conteiner=Contenedor
+#Constructor
+    def __init__(self, patente):
+        self.patente = patente
+        self.costoFijo = 20000.0
+        self.contenedor = None
+        self.ocupado = False
 
-#---------- Getters & Setters ----------
-
-#Getters & setters de Patente 
-    def get_patente(self):
+#Getters & Setters
+    def getPatente(self):
         return self.patente
-    def set_patente(self,valor):
-        self.patente=valor
-    patente=property (get_patente,set_patente)
+    def setPatente(self, patente):
+        self.patente = patente
 
-#Getters & setters de costoFijo
-    def get_costo_Fijo(self):
-        return self.costo_Fijo
-    def set_costo_Fijo(self,valor):
-        self.costo_Fijo=valor
-    costo_Fijo=property (get_costo_Fijo,set_costo_Fijo)
+    def getCostoFijo(self):
+        return self.costoFijo
 
-#Getters & setters de conteiner
-    def get_conteiner(self):
-        return self.conteiner
-    def set_conteiner(self,valor):
-        self.conteiner=valor
-    conteiner=property (get_conteiner,set_conteiner)
+    def getContenedor(self):
+        return self.contenedor
+    def setContenedor(self, contenedor : Contenedor):
+        self.contenedor = contenedor
 
-#---------- Getters & Setters ----------
-#...................................................
-#---------- Funciones ----------
-    
-    def llevaConteiner(self):
-        return True
-    
-    
-    def calcularMonto(self):
-        return 0.0
+    def llevaContenedor(self):
+        return self.contenedor is not None
