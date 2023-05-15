@@ -1,101 +1,156 @@
-from abc import ABC
-import Medida
+from abc import ABC, abstractmethod
 
-class Contenedor:
+from Clases.Contenedores.Medida import Medida
+from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
-    id=0
-    interior=Medida
-    exterior=Medida
-    pies=0
-    max_Peso=0.0
-    max_Volumen=0.0
-    precio_Base=0.0
-    hay_Espacio=False
-    es_Especial=False
 
-#------------Getters & setters------------
+class Contenedor(ABC):
 
-#Getters & setters id
+    def __init__(self, id, int_ancho, int_alto, int_largo, ext_ancho, ext_alto, ext_largo):
+        self.__id = id
+        self.__interior = Medida(int_ancho, int_alto, int_largo)
+        self.__exterior = Medida(ext_ancho, ext_alto, ext_largo)
+        self.__pies = 0
+        self.__max_peso = 0.0
+        self.__max_volumen = 0.0
+        self.__precio_base = 0.0
+        self.__hay_espacio = False
+        self.__es_especial = False
+        self.__mercaderia = []
+        self.__peso_actual = 0.0
+        self.__volumen_actual = 0.0
+        self.__unica_carga = False
+
+    def __init__(self, id, int_ancho, int_alto, int_largo, ext_ancho, ext_alto, ext_largo,
+                 pies, max_peso, max_volumen, precio_base):
+        self.__id = id
+        self.__interior = Medida(int_ancho, int_alto, int_largo)
+        self.__exterior = Medida(ext_ancho, ext_alto, ext_largo)
+        self.__pies = pies
+        self.__max_peso = max_peso
+        self.__max_volumen = max_volumen
+        self.__precio_base = precio_base
+        self.__hay_espacio = False
+        self.__es_especial = False
+        self.__mercaderia = []
+        self.__peso_actual = 0.0
+        self.__volumen_actual = 0.0
+        self.__unica_carga = 0
+
+
+# ------------Getters & setters------------
+
 
     def get_id(self):
-        return self.id
-    def set_id(self,valor):
-        self.id=valor
-    id=property(get_id,set_id)
+        return self.__id
 
-#Getters & setters interior
-    
+    def set_id(self, valor):
+        self.__id = valor
+
     def get_interior(self):
-        return self.interior
-    def set_interior(self,valor):
-        self.interior=valor
-    interior=property(get_interior,set_interior)
+        return self.__interior
 
-#Getters & setters exterior
-    
+    def set_interior(self, valor):
+        self.__interior = valor
+
     def get_exterior(self):
-        return self.exterior
-    def set_exterior(self,valor):
-        self.exterior=valor
-    exterior=property(get_exterior,set_exterior)
+        return self.__exterior
 
-#Getters & setters pies
-    
+    def set_exterior(self, valor):
+        self.__exterior = valor
+
     def get_pies(self):
-        return self.pies
-    def set_pies(self,valor):
-        self.pies=valor
-    pies=property(get_pies,set_pies)
+        return self.__pies
 
-#Getters & setters maxPeso
-    
+    def set_pies(self, valor):
+        self.__pies = valor
+
     def get_max_Peso(self):
-        return self.max_Peso
-    def set_max_Peso(self,valor):
-        self.max_Peso=valor
-    max_Peso=property(get_max_Peso,set_max_Peso)
+        return self.__max_peso
 
-#Getters & setters maxVolumen
-    
+    def set_max_Peso(self, valor):
+        self.__max_peso = valor
+
     def get_max_Volumen(self):
-        return self.max_Volumen
-    def set_max_Volumen(self,valor):
-        self.max_Volumen=valor
-    max_Volumen=property(get_max_Volumen,set_max_Volumen)
+        return self.__max_volumen
 
-#Getters & setters precioBase
-    
+    def set_max_Volumen(self, valor):
+        self.__max_volumen = valor
+
     def get_precio_Base(self):
-        return self.precio_Base
-    def set_precio_Base(self,valor):
-        self.precio_Base=valor
-    precio_Base=property(get_precio_Base,set_precio_Base)    
+        return self.__precio_base
 
-#Getters & setters hayEspacio
+    def set_precio_Base(self, valor):
+        self.__precio_base = valor
 
     def get_hay_Espacio(self):
-        return self.hay_Espacio
-    def set_hay_Espacio(self,valor):
-        self.hay_Espacio=valor
-    hay_Espacio=property(get_hay_Espacio,set_hay_Espacio)
+        return self.__hay_espacio
 
-#Getters & setters esEspecial
+    def is_space(self):
+        return self.__peso_actual < self.__max_peso and self.__volumen_actual < self.__max_volumen
 
     def get_es_Especial(self):
-        return self.es_Especial
-    def set_es_Especial(self,valor):
-        self.es_Especial=valor
-    es_Especial=property(get_es_Especial,set_es_Especial)     
+        return self.__es_especial
 
-#------------Getters & setters------------
-#............................................
-#------------Funciones------------
+    def es_Especial(self, valor):
+        self.__es_especial = valor
+
+    def get_mercaderia(self):
+        return self.__mercaderia
+
+    def cargar_mercaderia(self, mercaderia):
+
+        if not self.get_hay_Espacio():
+            raise ContenedorLlenoException("El contenedor esta lleno!!")
+        else:
+            self.__mercaderia.append(mercaderia)
+            self.actualizarEspacio(mercaderia)
+
+    def get_peso_actual(self):
+        return self.__peso_actual
+
+    def set_peso_actual(self, peso):
+        self.__peso_actual = peso
+
+    def get_volumen_actual(self):
+        return self.__volumen_actual
+
+    def set_volumen_actual(self, v):
+        self.__volumen_actual = v
+
+    def get_unica_carga(self):
+        return self.__unica_carga
+
+    def es_unica_carga(self):
+        self.validarUnicaCarga()
+
+    id = property(get_id, set_id)
+    interior = property(get_interior, set_interior)
+    exterior = property(get_exterior, set_exterior)
+    max_Volumen = property(get_max_Volumen, set_max_Volumen)
+    max_Peso = property(get_max_Peso, set_max_Peso)
+    pies = property(get_pies, set_pies)
+    hay_espacio = property(get_hay_Espacio, is_space)
+    precio_base = property(get_precio_Base, set_precio_Base)
+    es_especial = property(get_es_Especial, es_Especial)
+    mercaderia = property(get_mercaderia, cargar_mercaderia)
+    peso_actual = property(get_peso_actual, set_peso_actual)
+    volumen_actual = property(get_peso_actual, set_peso_actual)
+    unica_carga = property(get_unica_carga, es_unica_carga)
+
+# ------------Getters & setters------------
+# ............................................
+# ------------Funciones------------
+
+    def actualizarEspacio(self, mercaderia):
+        self.__peso_actual += mercaderia.get_peso()
+        self.__volumen_actual += mercaderia.get_volumen()
 
     @abstractmethod
-    def calcularPrecio(self):
-        return 0.0
-    
-    @abstractmethod
-    def calcularEspacio(self):
-        pass
-    
+    def validarUnicaCarga(self):
+        primer_cargado = self.__mercaderia[0]
+        for mercaderia in self.__mercaderia:
+            if not primer_cargado.id == mercaderia:
+                return False
+        return True
