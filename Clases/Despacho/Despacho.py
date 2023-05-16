@@ -1,6 +1,7 @@
 
-from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
-from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
+from Excepciones.ContenerdorLlenoException import ContenedorLlenoException
+from Excepciones.ExcesoMedidasException import ExcesoMedidasException
+from Excepciones.NoListaBarcosException import NoListaBarcosException
 from Cliente import Cliente
 from Contenedores import Contenedor
 from Barco import Barco
@@ -98,4 +99,34 @@ class Despacho:
                print(f"Error {e.get_code} / {e.get_mensaje}")       
 
 
-    
+    def mayorbarcoKm (self,barcos):
+        
+        if not barcos:
+            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)  
+        auxBarco=Barco()                
+        auxBarco=barcos[0]
+
+        for barco in barcos:
+            if barco.km_Recorridos > auxBarco.km_Recorridos:
+                auxBarco=barco
+
+        
+        print(f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+
+
+
+
+    def menorbarcoKm (self,barcos):
+        if not barcos:
+            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)   
+          
+        auxBarco=Barco()                
+        auxBarco=barcos[0]
+
+        for barco in barcos:
+            if barco.km_Recorridos < auxBarco.km_Recorridos:
+                auxBarco=barco
+
+        
+        print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+

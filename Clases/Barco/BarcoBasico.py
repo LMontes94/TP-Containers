@@ -13,7 +13,7 @@ class BarcoBasico(Barco):
 
       contAux=Contenedor()
       listAux=list()
-      while self.conteiner():
+      while self.conteiner:
           contAux=self.conteiner.pop(0)
           listAux.append(contAux)
 
