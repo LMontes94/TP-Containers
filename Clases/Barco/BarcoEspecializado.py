@@ -1,6 +1,7 @@
+from Contenedores import Contenedor
 import Barco
 from abc import ABC,abstractmethod
-from Contenedores import Contenedor
+
 
 class BarcoEspecializado(Barco):
      
@@ -23,5 +24,13 @@ class BarcoEspecializado(Barco):
         super().sumaKmRecorridos()
 
         def descargar(self):
-            
+              
+            contAux=Contenedor()
+            listAux=list()
+            for ind in self.conteiner:
+             contAux=self.conteiner().remove
+             listAux.append(contAux)
+
+            self.peso_Actual=0.0   
+            return listAux
                 
