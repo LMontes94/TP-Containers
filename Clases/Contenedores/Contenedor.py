@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 from Clases.Contenedores.Medida import Medida
 from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
+from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Mercaderia.Mercaderia import Mercaderia
 
 
@@ -100,12 +101,8 @@ class Contenedor(ABC):
         return self.__mercaderia
 
     def cargar_mercaderia(self, mercaderia):
-
-        if not self.get_hay_Espacio():
-            raise ContenedorLlenoException("El contenedor esta lleno!!")
-        else:
-            self.__mercaderia.append(mercaderia)
-            self.actualizarEspacio(mercaderia)
+        self.__mercaderia.append(mercaderia)
+        self.actualizarEspacio(mercaderia)
 
     def get_peso_actual(self):
         return self.__peso_actual
@@ -147,10 +144,18 @@ class Contenedor(ABC):
         self.__peso_actual += mercaderia.get_peso()
         self.__volumen_actual += mercaderia.get_volumen()
 
-    @abstractmethod
     def validarUnicaCarga(self):
         primer_cargado = self.__mercaderia[0]
         for mercaderia in self.__mercaderia:
             if not primer_cargado.id == mercaderia:
                 return False
         return True
+    
+    def validarCargaMercaderia(self, mercaderia):
+        if not self.get_hay_Espacio() :
+            raise ContenedorLlenoException("El contenedor esta lleno!!", 302)
+        elif self.__interior.ancho < mercaderia.ancho or self.__interior.alto < mercaderia.alto or self.__interio.largo < mercaderia.largo:
+            raise ExcesoMedidasException(f"Las medidas de la {mercaderia.nombre} exceden el limite!!",303)
+        else:
+            self.cargar_mercaderia(mercaderia)
+            

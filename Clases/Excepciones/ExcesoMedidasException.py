@@ -1,8 +1,7 @@
-
-class ContenedorLlenoException(Exception):
-    def __init__(self, msj, code):
+class ExcesoMedidasException(Exception):
+    def __init__(self, msj,code):
         self.mensaje = msj
-        self.code = code
+        self.code = code 
 
     def get_mensaje(self):
         return self.mensaje

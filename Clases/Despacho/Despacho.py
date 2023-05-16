@@ -1,4 +1,6 @@
 
+from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
+from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Cliente import Cliente
 from Contenedores import Contenedor
 from Barco import Barco
@@ -13,7 +15,7 @@ class Despacho:
         self.cliente = []
         self.retiro = False  # revisar!!
         self.conteiner_Completo = False
-        self.containers = []
+        self.containers = [Contenedor()]
         self.barcos = []
         self.camiones = [Camion() for _ in range(Despacho.MAX_CAMIONES)]
 
@@ -51,10 +53,10 @@ class Despacho:
 
 # Getters & setters conteiner
     def get_container(self):
-        return self.container
+        return self.containers
 
     def set_container(self, valor):
-        self.container = valor
+        self.containers = valor
     container = property(get_container, set_container)
 
 # Getters & setters Barco :Lista
@@ -84,6 +86,13 @@ class Despacho:
     def buscarContenedor(self, contenedor):
         return self.containers.index(contenedor)
 
-    def cargarContenedor(self, contenedor):
-
+    def cargarContenedor(self, contenedor,cliente):
         posContenedor = self.buscarContenedor(contenedor)
+        
+        try:
+            for mercaderia in cliente.mercaderia:
+                self.containers[posContenedor].validarCargaMercaderia(mercaderia) 
+        except ContenedorLlenoException as e:
+              print(f"Error {e.get_code} / {e.get_mensaje}")
+        except ExcesoMedidasException as e:
+               print(f"Error {e.get_code} / {e.get_mensaje}")       
