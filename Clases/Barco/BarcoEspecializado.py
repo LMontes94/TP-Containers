@@ -24,13 +24,13 @@ class BarcoEspecializado(Barco):
         super().sumaKmRecorridos()
 
         def descargar(self):
-              
             contAux=Contenedor()
             listAux=list()
-            for ind in self.conteiner:
-             contAux=self.conteiner().remove
-             listAux.append(contAux)
-
-            self.peso_Actual=0.0   
+            while self.conteiner():
+                contAux=self.conteiner.pop(0)
+                listAux.append(contAux)
+          
+            self.peso_Actual=0.0    
             return listAux
+
                 

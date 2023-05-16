@@ -13,11 +13,12 @@ class BarcoBasico(Barco):
 
       contAux=Contenedor()
       listAux=list()
-      for ind in self.conteiner():
-           contAux=self.conteiner().remove
-           listAux.append(contAux)
+      while self.conteiner():
+          contAux=self.conteiner.pop(0)
+          listAux.append(contAux)
 
-      self.peso_Actual=0.0    
+          
+          self.peso_Actual=0.0    
       return listAux
 
 
