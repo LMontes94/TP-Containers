@@ -10,10 +10,10 @@ class BarcoBasico(Barco):
          super().sumaKmRecorridos()
   
   def descargar(self):
-       
+
       contAux=Contenedor()
       listAux=list()
-      for ind in self.conteiner:
+      for ind in self.conteiner():
            contAux=self.conteiner().remove
            listAux.append(contAux)
 
