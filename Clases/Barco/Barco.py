@@ -10,7 +10,6 @@ class Barco(ABC):
         self.conteiner = list (Contenedor())
         self.sede_Inicial=''
         self.sede_Final=''
-        self.km_Recorridos=0.0
         self.km_Total=0.0
         self.es_Especial=False
         self.peso_Actual=0.0
@@ -74,16 +73,7 @@ class Barco(ABC):
         self.sede_Final=valor
 
     sede_Final= property(get_sede_Final,set_sede_Final)
-
-    #getters y setters kmsRecorridos
-    def get_km_Recorridos(self):
-        return self.km_Recorridos
     
-    def set_km_Recorridos(self,valor):
-        self.km_Recorridos=valor
-
-    km_Recorridos= property(get_km_Recorridos,set_km_Recorridos)    
-
 #getters y setters kmsTotal
     def get_km_Total(self):
         return self.km_Total
@@ -116,15 +106,10 @@ class Barco(ABC):
 #-----------Funciones-----------
 
     @abstractmethod
-    def sumaKmRecorridos(self):
-        pass
-
-    @abstractmethod
     def descargar(self):
         pass
 
-
-
-
-
+    @abstractmethod
+    def obtenerKmRecorridos(self):
+        pass
 

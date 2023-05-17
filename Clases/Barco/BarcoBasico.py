@@ -3,11 +3,12 @@ from Contenedores.Contenedor import Contenedor
 
 class BarcoBasico(Barco):
   
+  def obtenerKmRecorridos(self,inicio,final):
+      kmRecorridos=GPS(inicio,final)
+          
+      self.km_Total+=kmRecorridos 
+      return kmRecorridos
 
-  def sumaKmRecorridos(self):
-         self.km_Recorridos=GPS(self.sedeInicial,self.sedeFinal)
-         self.km_Total+=self.km_Recorridos 
-         super().sumaKmRecorridos()
   
   def descargar(self):
 

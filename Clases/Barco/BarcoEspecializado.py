@@ -17,11 +17,12 @@ class BarcoEspecializado(Barco):
         self.es_Especial=False
         self.peso_Actual=0.0
 
+        def obtenerKmRecorridos(self,inicio,final):
+            kmRecorridos=GPS(inicio,final)
+          
+            self.km_Total+=kmRecorridos 
+            return kmRecorridos
 
-        def sumaKmRecorridos(self):
-            self.km_Recorridos=GPS(self.sedeInicial,self.sedeFinal)
-            self.km_Total+=self.km_Recorridos
-        super().sumaKmRecorridos()
 
         def descargar(self):
             contAux=Contenedor()

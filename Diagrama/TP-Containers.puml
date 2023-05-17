@@ -9,7 +9,6 @@ abstract class Barco{
    - conteiner : ArrayList<Contenedor>
    - sedeInicial
    - sedeFinal 
-   - kmRecorridos 
    - kmTotal
    - esEspecial: boolean 
    - pesoActual: Double 
@@ -23,7 +22,7 @@ abstract class Barco{
    + getContenedor(): Contenedor
    + setContenedor(Contenedor): void
    
-   + sumaKmRecorridos(): Double 
+   + obtenerKmRecorridos(): Double 
    + descargar()
 
 }
