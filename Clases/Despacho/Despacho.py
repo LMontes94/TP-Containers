@@ -1,24 +1,25 @@
 
-from Excepciones.ContenerdorLlenoException import ContenedorLlenoException
-from Excepciones.ExcesoMedidasException import ExcesoMedidasException
-from Excepciones.NoListaBarcosException import NoListaBarcosException
-from Cliente import Cliente
-from Contenedores import Contenedor
-from Barco import Barco
-from Camion import Camion
-
+from Clases.Excepciones.ContenedorNoEncontradoException import ContenedorNoEncontradoExcpetion
+from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
+from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
+from Clases.Excepciones.NoListaBarcosException import NoListaBarcosException
+from Clases.Cliente.Cliente import Cliente
+from Clases.Contenedores.Contenedor import Contenedor
+from Clases.Barco.Barco import Barco
+from Clases.Camion.Camion import Camion
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 class Despacho:
 
     MAX_CAMIONES = 5
 
     def __init__(self):
-        self.cliente = []
-        self.retiro = False  # revisar!!
-        self.conteiner_Completo = False
-        self.containers = [Contenedor()]
-        self.barcos = []
-        self.camiones = [Camion() for _ in range(Despacho.MAX_CAMIONES)]
+        self.__cliente = []
+        self.__retiro = False  # revisar!!
+        self.__conteiner_Completo = False
+        self.__containers = []
+        self.__barcos = []
+        self.__camiones = []
 
 
 # ------------Getters & setters------------
@@ -27,55 +28,55 @@ class Despacho:
 
 
     def get_cliente(self):
-        return self.cliente
+        return self.__cliente
 
-    def set_cliente(self, valor):
-        self.cliente = valor
-    cliente = property(get_cliente, set_cliente)
+    def agregar_cliente(self, valor):
+        self.__cliente.append(valor)
+    cliente = property(get_cliente, agregar_cliente)
 
 # Getters & setters retiro
 
     def get_retiro(self):
-        return self.retiro
+        return self.__retiro
 
     def set_retiro(self, valor):
-        self.retiro = valor
+        self.__retiro = valor
     retiro = property(get_retiro, set_retiro)
 
 # Getters & setters conteinerCompleto
 
     def get_conteiner_Completo(self):
-        return self.conteiner_Completo
+        return self.__conteiner_Completo
 
     def set_conteiner_Completo(self, valor):
-        self.conteiner_Completo = valor
+        self.__conteiner_Completo = valor
     conteiner_Completo = property(
         get_conteiner_Completo, set_conteiner_Completo)
 
 # Getters & setters conteiner
-    def get_container(self):
-        return self.containers
+    def get_containers(self):
+        return self.__containers
 
-    def set_container(self, valor):
-        self.containers = valor
-    container = property(get_container, set_container)
+    def agregar_container(self, valor):
+        self.__containers.append(valor)
+    containers = property(get_containers, agregar_container)
 
 # Getters & setters Barco :Lista
 
     def get_barcos(self):
-        return self.barcos
+        return self.__barcos
 
     def set_barcos(self, valor):
-        self.barcos = valor
+        self.__barcos = valor
     barcos = property(get_barcos, set_barcos)
 
 # Getters & setters camiones:Lista
 
     def get_camiones(self):
-        return self.camiones
+        return self.__camiones
 
     def set_camiones(self, valor):
-        self.camiones = valor
+        self.__camiones = valor
     camiones = property(get_camiones, set_camiones)
 
 
@@ -85,18 +86,22 @@ class Despacho:
 
 
     def buscarContenedor(self, contenedor):
-        return self.containers.index(contenedor)
-
+        pos =  self.__containers.index(contenedor)
+        if pos > -1:
+            return pos 
+        raise ContenedorNoEncontradoExcpetion("El contenedor no se encuentra en nuesta lista de contenedores!!")
+    
     def cargarContenedor(self, contenedor,cliente):
-        posContenedor = self.buscarContenedor(contenedor)
-        
         try:
+            posContenedor = self.buscarContenedor(contenedor)
             for mercaderia in cliente.mercaderia:
-                self.containers[posContenedor].validarCargaMercaderia(mercaderia) 
+                self.__containers[posContenedor].validarCargaMercaderia(mercaderia) 
+        except ContenedorNoEncontradoExcpetion as e:
+               print(f"Error {e.get_code()} / {e.get_mensaje}")
         except ContenedorLlenoException as e:
-              print(f"Error {e.get_code} / {e.get_mensaje}")
+              print(f"Error {e.get_code()} / {e.get_mensaje()}")
         except ExcesoMedidasException as e:
-               print(f"Error {e.get_code} / {e.get_mensaje}")       
+               print(f"Error {e.get_code()} / {e.get_mensaje()}")       
 
 
     def mayorbarcoKm (self,barcos):

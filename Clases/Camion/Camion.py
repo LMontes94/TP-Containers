@@ -1,4 +1,4 @@
-from Contenedores import Contenedor
+from Clases.Contenedores.Contenedor import Contenedor
 
 class Camion:
 #Constructor

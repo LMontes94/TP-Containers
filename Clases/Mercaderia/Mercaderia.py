@@ -57,3 +57,7 @@ class Mercaderia:
     es_especial = property(get_es_especial,is_especial)
 
     
+    def __eq__(self,otro):
+       if isinstance(otro,self.__class__):
+           return self.id == otro.id 
+       return False

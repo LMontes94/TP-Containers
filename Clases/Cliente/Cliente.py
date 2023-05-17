@@ -1,4 +1,4 @@
-from Mercaderia import Mercaderia
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 class Cliente:
     #Constructor

@@ -1,4 +1,4 @@
-from Contenedores import Contenedor
+from Clases.Contenedores.Contenedor import Contenedor
 from abc import ABC , abstractmethod
 
 class Barco(ABC):

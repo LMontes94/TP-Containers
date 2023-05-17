@@ -1,5 +1,4 @@
 
-from typing import Container
 from unittest import TestCase
 
 from Clases.Contenedores.Basico import Basico
@@ -51,3 +50,27 @@ class ContenedorTest(TestCase):
         
         basico.validarCargaMercaderia(mercaderia)
         assert len(basico.get_mercaderia()) > 0
+        
+    def test_validar_unica_cargaok(self):
+        basico = FlatRack(1023)
+        mercaderia1 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
+        mercaderia2 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
+        mercaderia3 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
+        
+        basico.validarCargaMercaderia(mercaderia1)
+        basico.validarCargaMercaderia(mercaderia2)
+        basico.validarCargaMercaderia(mercaderia3)
+        
+        assert basico.validarUnicaCarga()
+        
+    def test_not_validar_unica_carga(self):
+        basico = FlatRack(1023)
+        mercaderia1 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
+        mercaderia2 = Mercaderia(100,"Mesa",3.0,5.0,1.0,2.0,5.0)
+        mercaderia3 = Mercaderia(10010,"Pelota",3.0,5.0,1.0,2.0,5.0)
+        
+        basico.validarCargaMercaderia(mercaderia1)
+        basico.validarCargaMercaderia(mercaderia2)
+        basico.validarCargaMercaderia(mercaderia3)
+        
+        assert not basico.validarUnicaCarga()

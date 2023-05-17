@@ -131,16 +131,16 @@ class Contenedor(ABC):
 
     def validarUnicaCarga(self):
         primer_cargado = self.__mercaderia[0]
-        for mercaderia in self.__mercaderia:
-            if not primer_cargado.id == mercaderia:
+        for mercaderia in self.__mercaderia[1:]:
+            if not primer_cargado == mercaderia:
                 return False
         return True
     
     def validarCargaMercaderia(self, mercaderia):
         if self.get_hay_Espacio() :
-            raise ContenedorLlenoException("El contenedor esta lleno!!", 302)
+            raise ContenedorLlenoException("El contenedor esta lleno!!")
         elif self.__interior.ancho < mercaderia.medida.ancho or self.__interior.alto < mercaderia.medida.alto or self.__interior.largo < mercaderia.medida.largo:
-            raise ExcesoMedidasException(f"Las medidas de la {mercaderia.nombre} exceden el limite!!",303)
+            raise ExcesoMedidasException(f"Las medidas de la {mercaderia.nombre} exceden el limite!!")
         else:
             self.cargar_mercaderia(mercaderia)
             
