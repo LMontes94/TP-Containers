@@ -8,3 +8,4 @@ class BasicoHC(Contenedor):
         self.set_pies(40)
         self.set_max_Peso(32500.0)
         self.set_max_Volumen(67.7)
+

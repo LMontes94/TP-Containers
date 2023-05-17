@@ -137,9 +137,9 @@ class Contenedor(ABC):
         return True
     
     def validarCargaMercaderia(self, mercaderia):
-        if not self.get_hay_Espacio() :
+        if self.get_hay_Espacio() :
             raise ContenedorLlenoException("El contenedor esta lleno!!", 302)
-        elif self.__interior.ancho < mercaderia.ancho or self.__interior.alto < mercaderia.alto or self.__interio.largo < mercaderia.largo:
+        elif self.__interior.ancho < mercaderia.medida.ancho or self.__interior.alto < mercaderia.medida.alto or self.__interior.largo < mercaderia.medida.largo:
             raise ExcesoMedidasException(f"Las medidas de la {mercaderia.nombre} exceden el limite!!",303)
         else:
             self.cargar_mercaderia(mercaderia)

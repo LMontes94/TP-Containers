@@ -8,3 +8,4 @@ class Basico(Contenedor):
         self.set_pies(20)
         self.set_max_Peso(24000.0)
         self.set_max_Volumen(32.6)
+    
