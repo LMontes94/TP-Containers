@@ -23,21 +23,6 @@ class Contenedor(ABC):
         self.__volumen_actual = 0.0
         self.__unica_carga = False
 
-    def __init__(self, id, int_ancho, int_alto, int_largo, ext_ancho, ext_alto, ext_largo,
-                 pies, max_peso, max_volumen, precio_base):
-        self.__id = id
-        self.__interior = Medida(int_ancho, int_alto, int_largo)
-        self.__exterior = Medida(ext_ancho, ext_alto, ext_largo)
-        self.__pies = pies
-        self.__max_peso = max_peso
-        self.__max_volumen = max_volumen
-        self.__precio_base = precio_base
-        self.__hay_espacio = False
-        self.__es_especial = False
-        self.__mercaderia = []
-        self.__peso_actual = 0.0
-        self.__volumen_actual = 0.0
-        self.__unica_carga = 0
 
 
 # ------------Getters & setters------------
