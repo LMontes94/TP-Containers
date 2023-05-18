@@ -203,6 +203,32 @@ class Despacho:
                 return 250000
             else:
                 return 1500 * (peso_total // 100)
+            
+    def containersUnicaCarga(self):
+        containers = {}
+        for barco in self.__barcos:
+            for contenedor in barco.get_conteiner():
+                if contenedor.validarCargaUnica():
+                    containers[contenedor] = barco.get_km_Total()
+
+        return containers
+
+    def buscarContenedorMaxKm(self, containers):
+        container_max_km = max(containers,key = containers.get)
+        return container_max_km
+
+    def hayContenedoresConUnicaCarga(self, contenedores):
+        return len(contenedores) == 0 
+
+    def conteinerMayorViajeCompleto(self,container):
+
+       try:
+          containers = self.containersUnicaCarga()
+          if self.hayContenedoresConUnicaCarga(containers):
+               max_km = self.buscarContenedorMaxKm(containers)
+          return max_km    
+       except SinUnicaCargaExcpetion as e:
+               print(f"Error {e.get_code()} / {e.get_mensaje}")
 
       
 
