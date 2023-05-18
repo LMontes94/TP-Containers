@@ -1,5 +1,5 @@
-import Barco
-from Contenedores.Contenedor import Contenedor
+from Clases.Barco.Barco import Barco
+from Clases.Contenedores.Contenedor import Contenedor
 
 class BarcoBasico(Barco):
   

@@ -6,25 +6,18 @@ from abc import ABC,abstractmethod
 class BarcoEspecializado(Barco):
      
      def __init__(self):
-        self.id=0
-        self.max_Containers=0
-        self.max_Peso=0.0
-        self.conteiner = list (Contenedor())
-        self.sede_Inicial=''
-        self.sede_Final=''
-        self.km_Recorridos=0.0
-        self.km_Total=0.0
-        self.es_Especial=True
-        self.peso_Actual=0.0
+         super().__init__()
+         self.es_Especial=True
+        
 
-        def obtenerKmRecorridos(self,inicio,final):
+     def obtenerKmRecorridos(self,inicio,final):
             kmRecorridos=GPS(inicio,final)
           
             self.km_Total+=kmRecorridos 
             return kmRecorridos
 
 
-        def descargar(self):
+     def descargar(self):
             contAux=Contenedor()
             listAux=list()
             while self.conteiner:
