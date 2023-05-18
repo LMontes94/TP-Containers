@@ -1,4 +1,5 @@
 from unittest import TestCase
+from Test.GPSMock import GPSMock
 
 from Clases.Barco.BarcoBasico import BarcoBasico
 from Clases.Contenedores.Basico import Basico
@@ -9,7 +10,7 @@ from Clases.Contenedores.Medida import Medida
 
 class BarcoTest(TestCase):
     def test_obtener_Km_Recorridos(self):
-        #km_Recorridos=GPS(inicio,final) No se como se hace el mock de GPS por eso paso los km directos.
+        km_Recorridos=GPSMock()
         barcoT=BarcoBasico()
         basico=Basico(189)
         barcoT.cargar_conteiner(basico)
