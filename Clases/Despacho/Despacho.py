@@ -137,61 +137,35 @@ class Despacho:
         print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
 
 
-    def superaMaxPeso(self,barco,conteiner):
-        return conteiner.get_peso_actual() + barco.get_peso_Actual() <= barco.get_max_Peso()
-    
-    def conteinerCargadosSuperaMaximo(self,barco): 
-        return len(barco.get_conteiner()) < barco.get_max_Containers()
     
     def verificarCargaBarco (self,conteiner):  
             
       flag=False
       i=0
 
-      while i < len(self.__barcos) and not flag:
+      while self.barcos() and flag!=True:
          
-         if conteiner.get_es_especial() and self.__barcos[i].get_es_Especial():
+         if conteiner.__es_especial ==True and self.barcos[i].es_Especial == True:
 
-            if self.superaMaxPeso(self.__barcos[i],conteiner) and self.conteinerCargadosSuperaMaximo(self.__barcos[i]):
-                self.__barcos[i].cargar_contenedor(conteiner)
+            if ((conteiner.__peso_actual+self.barcos[i].peso_Actual) <= self.barcos[i].max_Peso) and len(self.barcos[i].get_conteiner()) < self.barcos[i].max_Containers :
+
+
+                self.barcos[i].cargar_contenedor(conteiner)
                 flag=True
 
-         elif not conteiner.get_es_especial() and not self.__barcos[i].get_es_Especial(): 
+         elif conteiner.__es_especial == False and  self.barcos[i].es_Especial == False: 
 
-             if self.superaMaxPeso(self.__barcos[i],conteiner) and self.conteinerCargadosSuperaMaximo(self.__barcos[i]):
+             if ((conteiner.__peso_actual+self.barcos[i].peso_Actual) <= self.barcos[i].max_Peso) and len(self.barcos[i].get_conteiner()) < self.barcos[i].max_Containers :
 
-                self.__barcos[i].cargar_contenedor(conteiner)
+
+                self.barcos[i].cargar_contenedor(conteiner)
                 flag=True
 
          i=i+1
-    
-    def containersUnicaCarga(self):
-        containers = {}
-        for barco in self.__barcos:
-            for contenedor in barco.get_conteiner():
-                if contenedor.validarCargaUnica():
-                    containers[contenedor] = barco.get_km_Total()
-                    
-        return containers
-    
-    def buscarContenedorMaxKm(self, containers):
-        container_max_km = max(containers,key = containers.get)
-        return container_max_km
-    
-    def hayContenedoresConUnicaCarga(self, contenedores):
-        return len(contenedores) == 0 
-    
-    def conteinerMayorViajeCompleto(self,container):
-       
-       try:
-          containers = self.containersUnicaCarga()
-          if self.hayContenedoresConUnicaCarga(containers):
-               max_km = self.buscarContenedorMaxKm(containers)
-          return max_km    
-       except SinUnicaCargaExcpetion as e:
-               print(f"Error {e.get_code()} / {e.get_mensaje}")
-               
-       
+
+
+      
+
 
 
 
