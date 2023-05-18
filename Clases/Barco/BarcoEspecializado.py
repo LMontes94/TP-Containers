@@ -1,5 +1,5 @@
-from Contenedores import Contenedor
-import Barco
+from Clases.Contenedores.Contenedor import Contenedor
+from Clases.Barco.Barco import Barco
 from abc import ABC,abstractmethod
 
 

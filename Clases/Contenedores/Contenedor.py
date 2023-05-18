@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from Clases.Contenedores.Medida import Medida
 from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
 from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
+from Clases.Excepciones.SinUnicaCargaException import SinUnicaCargaExcpetion
 from Clases.Mercaderia.Mercaderia import Mercaderia
 
 
@@ -21,9 +22,6 @@ class Contenedor(ABC):
         self.__mercaderia = []
         self.__peso_actual = 0.0
         self.__volumen_actual = 0.0
-        self.__unica_carga = False
-
-
 
 # ------------Getters & setters------------
 
@@ -76,10 +74,10 @@ class Contenedor(ABC):
     def is_space(self):
         return self.__peso_actual < self.__max_peso and self.__volumen_actual < self.__max_volumen
 
-    def get_es_Especial(self):
+    def get_es_especial(self):
         return self.__es_especial
 
-    def es_Especial(self, valor):
+    def set_es_especial(self, valor):
         self.__es_especial = valor
 
     def get_mercaderia(self):
@@ -101,12 +99,6 @@ class Contenedor(ABC):
     def set_volumen_actual(self, v):
         self.__volumen_actual = v
 
-    def get_unica_carga(self):
-        return self.__unica_carga
-
-    def es_unica_carga(self):
-        self.validarUnicaCarga()
-
     id = property(get_id, set_id)
     interior = property(get_interior, set_interior)
     exterior = property(get_exterior, set_exterior)
@@ -115,11 +107,10 @@ class Contenedor(ABC):
     pies = property(get_pies, set_pies)
     hay_espacio = property(get_hay_Espacio, is_space)
     precio_base = property(get_precio_Base, set_precio_Base)
-    es_especial = property(get_es_Especial, es_Especial)
+    es_especial = property(get_es_especial, set_es_especial)
     mercaderia = property(get_mercaderia, cargar_mercaderia)
     peso_actual = property(get_peso_actual, set_peso_actual)
     volumen_actual = property(get_peso_actual, set_peso_actual)
-    unica_carga = property(get_unica_carga, es_unica_carga)
 
 # ------------Getters & setters------------
 # ............................................
@@ -134,6 +125,7 @@ class Contenedor(ABC):
         for mercaderia in self.__mercaderia[1:]:
             if not primer_cargado == mercaderia:
                 return False
+                #raise SinUnicaCargaExcpetion("Este contenedor tiene diferentes mercaderia!!")
         return True
     
     def validarCargaMercaderia(self, mercaderia):

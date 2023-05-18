@@ -9,6 +9,7 @@ class FlatRack(Contenedor):
         super().__init__(id, None, 230.0, 600.0, None, 230.0, 610.0)
         self.set_max_Peso(45000.0)
         self.set_max_Volumen(33.0)
+        self.set_es_especial(True)
     
     def validarCargaMercaderia(self, mercaderia):
         if self.get_hay_Espacio() :
