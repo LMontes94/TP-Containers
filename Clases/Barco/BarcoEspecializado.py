@@ -14,7 +14,7 @@ class BarcoEspecializado(Barco):
         self.sede_Final=''
         self.km_Recorridos=0.0
         self.km_Total=0.0
-        self.es_Especial=False
+        self.es_Especial=True
         self.peso_Actual=0.0
 
         def obtenerKmRecorridos(self,inicio,final):

@@ -50,10 +50,10 @@ class Barco(ABC):
     def get_conteiner(self):
         return self.conteiner
     
-    def set_conteiner(self,valor):
-        self.conteiner=valor
+    def cargar_conteiner(self,valor):
+        self.conteiner.append(valor)
 
-    conteiner= property(get_conteiner,set_conteiner)
+    conteiner= property(get_conteiner,cargar_conteiner)
 
     
     #getters y setters sedeInicial
