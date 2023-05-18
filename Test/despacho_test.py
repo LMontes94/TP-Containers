@@ -132,3 +132,29 @@ class DespachoTest(TestCase):
 
         
           print(f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+
+
+    def test_verificarCargaBarco (self):  
+      conteiner=Basico(980)                   
+      flag=False
+      i=0
+
+       while i < len(self.barcos) and flag == False:
+         
+         if conteiner.__es_especial ==True and self.barcos[i].es_Especial == True:
+
+            if ((conteiner.__peso_actual+self.barcos[i].peso_Actual) <= self.barcos[i].max_Peso) and len(self.barcos[i].get_conteiner()) < self.barcos[i].max_Containers :
+
+
+                self.barcos[i].cargar_contenedor(conteiner)
+                flag=True
+
+         elif conteiner.__es_especial == False and  self.barcos[i].es_Especial == False: 
+
+             if ((conteiner.__peso_actual+self.barcos[i].peso_Actual) <= self.barcos[i].max_Peso) and len(self.barcos[i].get_conteiner()) < self.barcos[i].max_Containers :
+
+
+                self.barcos[i].cargar_contenedor(conteiner)
+                flag=True
+
+         i=i+1

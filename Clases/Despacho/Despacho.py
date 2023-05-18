@@ -137,12 +137,15 @@ class Despacho:
 
 
     
-    def verificarCargaBarco (self,conteiner):  
+    def verificarCargaBarco (self):  
             
       flag=False
       i=0
 
-      while self.barcos() and flag!=True:
+      conteiner=Basico()
+
+
+      while i < len(self.barcos) and flag == False:
          
          if conteiner.__es_especial ==True and self.barcos[i].es_Especial == True:
 
