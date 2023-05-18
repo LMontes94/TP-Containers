@@ -230,6 +230,73 @@ class Despacho:
        except SinUnicaCargaExcpetion as e:
                print(f"Error {e.get_code()} / {e.get_mensaje}")
 
+    def obtenerPrecio(self, container,idC,idB, distancia):
+        container = self.__containers[idC]
+        distancia = self.__barcos[idB].get_km_Total()
+
+        if not self.__barcos:
+            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion", 123)
+    
+        if container.hayEspacio() == False:
+            precio_base = self.__calcularPrecioBase(distancia)
+        else:
+            peso_total = container.get_peso_actual()
+            precio_base = self.__calcularPrecioBase(distancia, peso_total)
+        
+        if self.__retiro == True:
+            precio_base+=20000
+
+        return precio_base 
+
+    def __calcularPrecioBase(self, distancia, peso_total=None):
+        if distancia < 100:
+            if peso_total is None:
+                return 200000
+            else:
+                return 1000 * (peso_total // 100)
+        elif distancia < 1000:
+        
+            if peso_total is None:
+                return 210000
+            else:
+                return 1100 * (peso_total // 100)
+        elif distancia < 10000:
+            if peso_total is None:
+                return 230000
+            else:
+             return 1150 * (peso_total // 100)
+        else:
+            if peso_total is None:
+                return 250000
+            else:
+                return 1500 * (peso_total // 100)
+            
+    def containersUnicaCarga(self):
+        containers = {}
+        for barco in self.__barcos:
+            for contenedor in barco.get_conteiner():
+                if contenedor.validarCargaUnica():
+                    containers[contenedor] = barco.get_km_Total()
+
+        return containers
+
+    def buscarContenedorMaxKm(self, containers):
+        container_max_km = max(containers,key = containers.get)
+        return container_max_km
+
+    def hayContenedoresConUnicaCarga(self, contenedores):
+        return len(contenedores) == 0 
+
+    def conteinerMayorViajeCompleto(self,container):
+
+       try:
+          containers = self.containersUnicaCarga()
+          if self.hayContenedoresConUnicaCarga(containers):
+               max_km = self.buscarContenedorMaxKm(containers)
+          return max_km    
+       except SinUnicaCargaExcpetion as e:
+               print(f"Error {e.get_code()} / {e.get_mensaje}")
+
       
 
 
