@@ -18,7 +18,7 @@ class Despacho:
         self.__retiro = False  # revisar!!
         self.__conteiner_Completo = False
         self.__containers = []
-        self.__barcos = []
+        self.__barcos = list(Barco)
         self.__camiones = []
 
 
@@ -66,18 +66,18 @@ class Despacho:
     def get_barcos(self):
         return self.__barcos
 
-    def set_barcos(self, valor):
-        self.__barcos = valor
-    barcos = property(get_barcos, set_barcos)
+    def agregar_barcos(self, valor):
+        self.__barcos.append(valor) 
+    barcos = property(get_barcos,agregar_barcos)
 
 # Getters & setters camiones:Lista
 
     def get_camiones(self):
         return self.__camiones
 
-    def set_camiones(self, valor):
-        self.__camiones = valor
-    camiones = property(get_camiones, set_camiones)
+    def agregar_camiones(self, valor):
+        self.__camiones.append(valor)
+    camiones = property(get_camiones, agregar_camiones)
 
 
 # ------------Getters & setters------------
@@ -134,4 +134,44 @@ class Despacho:
 
         
         print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+
+
+    
+    def verificarCargaBarco (self,conteiner):  
+            
+      flag=False
+      i=0
+
+      while self.barcos() and flag!=True:
+         
+         if conteiner.__es_especial ==True and self.barcos[i].es_Especial == True:
+
+            if ((conteiner.__peso_actual+self.barcos[i].peso_Actual) <= self.barcos[i].max_Peso) and len(self.barcos[i].get_conteiner()) < self.barcos[i].max_Containers :
+
+
+                self.barcos[i].cargar_contenedor(conteiner)
+                flag=True
+
+         elif conteiner.__es_especial == False and  self.barcos[i].es_Especial == False: 
+
+             if ((conteiner.__peso_actual+self.barcos[i].peso_Actual) <= self.barcos[i].max_Peso) and len(self.barcos[i].get_conteiner()) < self.barcos[i].max_Containers :
+
+
+                self.barcos[i].cargar_contenedor(conteiner)
+                flag=True
+
+         i=i+1
+
+
+      
+
+
+
+
+
+
+
+
+
+
 
