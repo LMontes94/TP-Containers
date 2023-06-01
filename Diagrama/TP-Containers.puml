@@ -162,11 +162,19 @@ Cliente *-- Mercaderia
 'Notas
 
 note as n1 
-   - Cuando sale un conteiner??
-   - Conteiner Especial aparte o tipo ?¡?¡
-   - Mecanica gruas, hay que separar??
-   - Completa un cliente o varios
-   - como usar diccionarios
+  
+  validar carga, despacho decide cuando salir, mas que nada por los precios
+  Patron strategy 
+  contexto barco?
+  interface estrategia propulsor
+  vela o motor
+  arranca o termina el viaje, el gps calcula el promedio
+  y uso del combustible 
+
+  abstract factory en contenedor(con techo y sin techo)
+  modulo nuevo de contabilidad
+
+  mercaderia abstracta y crear los tres tipos de cargas 
 end note
 
 note left of Despacho::cargarBarco
