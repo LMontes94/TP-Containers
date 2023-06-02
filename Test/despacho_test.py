@@ -51,10 +51,7 @@ class DespachoTest(TestCase):
         self.assertIn(mercaderia3, basico.mercaderia)
         #assert len(despacho.get_containers()) > 0
 
-
-
-
-    def menorbarcoKm (self):
+    def test_menorbarcoKm (self):
           barcos=list(Barco)  
           b=Barco()
           b.id=10
@@ -94,8 +91,7 @@ class DespachoTest(TestCase):
         
           print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
         
-
-        def mayorbarcoKm (self,barcos):
+    def test_mayorbarcoKm (self,barcos):
           
           barcos=list(Barco)  
           b=Barco()
