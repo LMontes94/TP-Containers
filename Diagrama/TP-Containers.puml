@@ -12,6 +12,9 @@ abstract class Barco{
    - kmTotal
    - esEspecial: boolean 
    - pesoActual: Double 
+   - combustible : Double
+   - viajes : ArrayList<Viaje>
+   - estado : EstadoCombustible
 
    + getId(): Integer 
    + setId(Integer): void
@@ -24,7 +27,7 @@ abstract class Barco{
    
    + obtenerKmRecorridos(): Double 
    + descargar()
-
+   + viajar(): 'usa gastarCombustible que cambia según estado
 }
 
 class Camion{
@@ -128,13 +131,86 @@ class Despacho{
    + cargarConteiner(Mercaderia): void 
 }
 
-class Mercaderia{
+abstract class CalculadoraPrecio {
+   + obtenerPrecio()
+}
+
+abstract class Precios{
+   //tabla de precios   
+}
+
+abstract class CargarBarco {
+   + cargaBarco(barco) : void
+}
+
+abstract class KmRecorridos {
+   + calcularKmRecorridos()
+}
+
+abstract class Descargar {
+   + descargarBarco()
+}
+
+abstract class Transportar {
+   + transportar()
+}
+
+class TransportarContenedor{
+   + transportar()
+}
+
+class TransportarMercaderia {
+   +transportar()
+}
+
+abstract class EstadoCombustible {
+   + gastarCombustible()
+}
+
+class Vela implements EstadoCombustible{
+   + gastarCombustible()
+}
+
+class Motor implements EstadoCombustible{
+   + gastarCombustible()
+}
+
+class Viaje {
+   + combustibleUsado : int
+   + cantidadContainers : int
+   + horasDelViaje : int
+   + costoDelViaje : Double
+}
+
+' mock ModuloContable
+
+abstract class Mercaderia{
    - id : Integer 
    - nombre : String 
    - peso : Double 
    - volumen : Double 
    - medida : Medida
-   - esEspecial: boolean 
+   - esEspecial: boolean //se va
+}
+
+abstract class CargarMercaderia {
+   + cargar() : pass
+}
+
+class CargarAlimento implements CargarMercaderia {
+   + cargar()
+}
+
+class CargarQuimico implements CargarMercaderia {
+   + cargar()
+}
+
+class Alimento extends Mercaderia{
+
+}
+
+class Quimico extends Mercaderia {
+
 }
 
 ' Relaciones 
@@ -142,11 +218,20 @@ class Mercaderia{
 Barco <|-- BarcoBasico
 Barco <|-- BarcoEspecializado
 Barco <-- Contenedor
+Barco ..> Viajar
+Barco <-- Viaje 
+Barco ..> Transportar
+Barco <-- EstadoCombustible
+Barco ..> KmRecorridos
+Barco ..> Descargar
 
 Contenedor <|-- Basico
 Contenedor <|-- BasicoHC
 Contenedor <|-- FlatRack
+Contenedor <|-- Ventilado
+Contenedor <|-- OpenTop
 Contenedor <-- Medida
+Contenedor --> CargarMercaderia
 
 Camion <-- Contenedor
 
@@ -156,8 +241,15 @@ Despacho <-- Cliente
 Despacho o-- Camion
 Despacho <-- Barco
 Despacho <-- Contenedor
+Despacho ..> CalculadoraPrecio
+Despacho ..> CargarBarco
 
 Cliente *-- Mercaderia
+
+Transportar <.. TransportarContenedor
+Transportar <.. TransportarMercaderia
+
+Precios --> CalculadoraPrecio
 
 'Notas
 
@@ -197,6 +289,21 @@ end note
 note left of Contenedor::validarCargaCompletaUnica
   recorre los id de las mercancias, si es el mismo 
   y si lo completo. Y lo setea en cantidadCargaCompleta
+end note
+
+note right of Despacho::Cliente
+   Convertir en clase abstracta le encontramos actor alias 
+end note
+
+note right of Contenedor::mercaderia
+   Puede chequearse qué si un contenedor tiene quimico
+   Entonces no entraría el alimento se lo pasa al next contenedor
+   Estoy completo = Sí. se lo pasa al next contenedor
+end note
+
+note left of CargarMercaderia::cargar
+   Creemos que hay que usar un Strategy pero no
+   nos queda claro quien sería el contexto
 end note
 
 
