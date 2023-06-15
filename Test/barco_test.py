@@ -1,4 +1,5 @@
-from unittest import TestCase
+from unittest import TestCase 
+from unittest.mock import Mock
 from Test.GPSMock import GPSMock
 
 from Clases.Barco.BarcoBasico import BarcoBasico
@@ -9,13 +10,16 @@ from Clases.Contenedores.Medida import Medida
 
 
 class BarcoTest(TestCase):
+
     def test_obtener_Km_Recorridos(self):
+        gps = Mock()
+        gps.obtenerKmRecorridos.return_value = 500 
         km_Recorridos=GPSMock()
         barcoT=BarcoBasico()
         basico=Basico(189)
         barcoT.cargar_conteiner(basico)
 
-        km_Recorridos=18903.9
+        #km_Recorridos=18903.9
         barcoT.set_km_Total(barcoT.get_km_Total()+km_Recorridos)
 
         assert km_Recorridos > 0
