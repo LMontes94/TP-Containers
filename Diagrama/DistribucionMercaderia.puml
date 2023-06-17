@@ -1,0 +1,51 @@
+@startuml
+
+title Distrubucion de Mercaderia - Patron Chain of Responsability
+
+note "manejar(mercaderia){\nif(mercaderia.volumen < this.volumenDisponible && mercaderia.kg < this.kgDisponibles){\n     //lo agrego a la lista de mercaderia de este contenedor\n}else{\n     proximo.manejar(mercaderia)}" as NVentilado
+NVentilado ..Ventilado
+
+note "manejar(mercaderia){\n Ventilado containerVentilado = new Ventilado();\n proximo(containerVentilado);\n\n  Basico containerBasico = new Basico();\n  containerVentilado.proximo(basico);\n\n}" as NDespachoMercaderia
+DespachoMercaderia ..NDespachoMercaderia 
+
+note top of MainEmpresa
+"   List <ListaMercaderia> = new ArrayList();
+
+    DespachoMercaderia despachoMercaderia = new DespachoMercaderia();
+
+    despachoMercaderia(<ListaMercaderia>)
+" 
+end note
+
+note "Los manejadores concretos \nson autonomos e inmutables, y \naceptan toda la informacion\n necesaria unicamente a traves del \nconstructor" as N3
+
+
+
+interface Manejador{
+
+    + setProximo(m : Manejador)
+    + manejar(peticion)
+}
+class DespachoMercaderia <<(C, Yellow)>> implements Manejador{
+    - proximo : Manejador
+    + setProximo(m : Manejador)
+    + manejar(mercaderia)
+}
+
+
+class Ventilado << (C, pink) >> implements Manejador{
+    - proximo(m : Manejador)
+    + manejar(mercaderia)
+}
+class HighCube << (C, pink) >> implements Manejador
+class FlatRack << (C, pink) >> implements Manejador
+class OpenTop << (C, pink) >> implements Manejador
+
+class MainEmpresa << (C, orange) >>{
+
+
+}
+
+Manejador <|- MainEmpresa
+
+@enduml
