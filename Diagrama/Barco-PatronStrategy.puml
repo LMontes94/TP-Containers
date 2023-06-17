@@ -10,25 +10,27 @@ Barco ..N2
 note "actualizarCombustibleUtilizado(){\ncombustibleUsado = this.combustibleInicial - this.barco.getCombustibleActual\nthis.combustibleTotalUtilizado += combustibleUsado} \n\ngetCombustibleActual(){\nreturn this.combustibleTotalUtilizado;\n\ngetHorasTotales(){\nutiliozacion del modulo GPS integrado en el barco???}}" as N3
 
 note top of Barco : -el barco se debe instanciar con una cantidad de combustible inicial\ny con un sistema de propulsion inicial\nEl barco y el viaje dependen unos de otros para poder funcionar correctamente?\ncuando instancio un barco debo instanciar un viaje no? 
-note top of ModuloContable : -El viaje contiene un modulo contable?\n o el viaje usa un modulo contable?\nel modulo contable usa un viaje? 
+note top of ModuloContable : -El viaje contiene un modulo contable?\n o el viaje usa un modulo contable?\nel modulo contable usa un viaje?\n deberia tener relacion con el despacho
 class Barco {
-
+    - viaje : Viaje 
     - sistemaPropulsion : SistemaPropulsion
     - combustibleActual : float
     + Barco(sistemaPropulsionInicial, combustibleActual)
     + setSistemaPropulsion(sistemaPropulsion)
-    + marchar(tiempo : int)
+    + marchar()
     + getCombustibleActual() : float 
     + getSistemaPropulsion() : String
 }
 
-Barco o-- ModuloGPS
+Viaje o-- ModuloGPS
 
 interface SistemaPropulsion{
-
-    + activar(tiempo : int) : combustibleGastado
+    
+    + gastoCombustible(): Integer
+    + activar() : 
     + getNombre() : String
 }
+
 SistemaPropulsion o-- Barco
 class Vela implements SistemaPropulsion{
 
@@ -39,21 +41,29 @@ class Motor implements SistemaPropulsion{
 }
 
 class Viaje{
-    - conteinersTransportados : int
+    - sedeIncial: String
+    - sedeFinal: String
     - horasTotales : int 
-    - combustibleTotalUtilizado = 0 ;
-    - combustibleIncial : float
     + Viaje(Barco)
-    + actualizarCombustibleUtilizado()
-    + getCombustibleTotalUtilizado()
     + getHorasTotales() : int
 }
-
+Barco o-- Viaje
 class ModuloContable{
     - gananciaPorContainer = 50%;(ejemplo)
-    + ModuloContable(viaje)
+    + ModuloContable(conteiners, )
     + getGanancia() : float
 }
 
-ModuloContable --> Viaje
+'ModuloContable --> Viaje
+note as N5
+ modificar pasaje de km recorridos(distancia)
+end note
+
+note left of Barco::marchar
+  el metodo marchar lo que debe hacer es:
+    Inicia el viaje 
+    donde activa el sistema de propulsion 
+    y va calculando el combustible consumido
+    
+end note 
 @enduml
