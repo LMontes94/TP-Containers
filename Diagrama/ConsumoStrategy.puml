@@ -1,0 +1,64 @@
+@startuml
+
+title ** Sistema de Propulsión de Barcos - Patrón Strategy
+
+abstract class SistemaPropulsion {
+    + gastoCombustible(): Integer
+    + activar(tiempo: int): void
+    + getNombre(): String
+}
+
+class Vela implements SistemaPropulsion {
+    - nombre: String = "Vela"
+    + gastoCombustible(): Integer
+    + activar(tiempo: int): void
+    + getNombre(): String
+}
+
+class Motor implements SistemaPropulsion {
+    - nombre: String = "Motor"
+    + gastoCombustible(): Integer
+    + activar(tiempo: int): void
+    + getNombre(): String
+}
+
+class Barco {
+    - viaje: Viaje
+    - sistemaPropulsion: SistemaPropulsion
+    - combustibleActual: float
+    + Barco(sistemaPropulsionInicial: SistemaPropulsion, combustibleActual: float)
+    + setSistemaPropulsion(sistemaPropulsion: SistemaPropulsion): void
+    + marchar(tiempo: int): void
+    + getCombustibleActual(): float
+    + getSistemaPropulsion(): String
+}
+
+class Viaje {
+    - sedeInicial: String
+    - sedeFinal: String
+    - horasTotales: int
+    + Viaje(barco: Barco)
+    + getHorasTotales(): int
+}
+
+class ModuloContable {
+    - gananciaPorContainer: float
+    + ModuloContable(gananciaPorContainer: float)
+    + getGanancia(contenedores: List<Container>): float
+}
+
+' relaciones 
+
+Barco *-- SistemaPropulsion
+Barco *-- Viaje
+ModuloContable *-- Viaje
+
+' notas
+
+note left of SistemaPropulsion
+Define los métodos para todos los sistemas de propulsión,
+como gastoCombustible() y activar(). 
+Las clases Vela y Motor son extenciones la clase abstracta, representando
+sistemas de propulsión específicos. 
+end note
+@enduml
