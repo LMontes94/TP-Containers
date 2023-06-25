@@ -1,0 +1,78 @@
+@startuml
+
+title ** Distrubucion de Mercaderia - Patron Chain of Responsibility **
+
+abstract class Manejador {
+    + manejar(mercaderia: Mercaderia): void
+    + setSiguiente(manejador: Manejador): void
+}
+
+class DespachoMercaderia {
+    - siguiente: Manejador
+    + manejar(mercaderia: Mercaderia): void
+    + setSiguiente(manejador: Manejador): void
+}
+
+class Contenedor {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class Ventilado {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class HighCube {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class FlatRack {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class OpenTop {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class MainEmpresa {
+    - despacho: DespachoMercaderia
+    + distribuirMercaderia(mercaderia: Mercaderia): void
+}
+
+' relaciones 
+
+MainEmpresa ..> DespachoMercaderia
+
+DespachoMercaderia --> Contenedor
+Contenedor <|-- Ventilado
+Contenedor <|-- HighCube
+Contenedor <|-- FlatRack
+Contenedor <|-- OpenTop
+
+Manejador <|.. DespachoMercaderia
+Manejador <|.. Contenedor
+Manejador <|.. Ventilado
+Manejador <|.. HighCube
+Manejador <|.. FlatRack
+Manejador <|.. OpenTop
+
+' notas
+
+note right of Manejador
+Define la clase abstracta común para todos los manejadores (contenedores)
+en la Chain of Responsibility. 
+Tiene un método manejar(mercaderia: Mercaderia) que representa el punto
+de entrada para manejar una solicitud de distribución de mercadería.
+Además, tiene un método setSiguiente(manejador: Manejador) que establece
+el siguiente manejador en la cadena.
+end note 
+
+note top of DespachoMercaderia
+Actúa como el punto de inicio de la Chain of Responsibility. 
+Implementa la interfaz Manejador y tiene una referencia al siguiente
+manejador en la cadena (siguiente). 
+El método manejar(mercaderia: Mercaderia) en esta clase verifica si 
+puede manejar la mercadería en base a ciertos criterios 
+(como el tipo de carga, capacidad disponible, etc.). 
+Si no puede manejarla, pasa la solicitud al siguiente manejador en la cadena.
+end note
+@enduml
