@@ -1,19 +1,23 @@
 from Clases.Contenedores.Contenedor import Contenedor
+from Clases.Barco.Vela import Vela
+from Clases.Barco.Motor import Motor
 from abc import ABC , abstractmethod
 
 class Barco(ABC):
 
     def __init__(self):
-        self.__id=0
-        self.__max_Containers=0
-        self.__max_Peso=0.0
+        self.__id=''
+        self.__max_Containers= ''
+        self.__max_Peso=''
+
         self.__conteiner = list()
         self.__sede_Inicial=''
         self.__sede_Final=''
         self.__km_Total=0.0
         self.__es_Especial=False
         self.__peso_Actual=0.0
-
+        self.__combustible_Actual = 100
+        self.__sistema_Propulsion = None
 
 
 #--------Getters & Setters-----------------
@@ -100,10 +104,36 @@ class Barco(ABC):
         self.__peso_Actual=valor
     peso_Actual=property(get_peso_Actual,set_peso_Actual)    
 
+    #getters y setters Sistema_Propulsion
+    def get_sistema_Propulsion(self):
+        return self.__sistema_Propulsion.get_nombre()
 
+    def set_sistema_Propulsion(self, sistema_Propulsion):
+        self.__sistema_Propulsion = sistema_Propulsion
+
+    sistema_Propulsion = property(get_sistema_Propulsion, set_sistema_Propulsion)    
+
+    # getters y setters de combustible_Actual 
+    def get_combustible_Actual(self):
+        return self.__combustible_Actual 
+    
+    def set_combustible_Actual(self, restarCombustible):
+        self.__combustible_Actual -= restarCombustible
+  
 #--------Getters & Setters-----------------   
 #  ...........................
 #-----------Funciones-----------
+
+
+    #funcion para los Sistemas_Propulsion
+
+    def viajar(self, tiempo):
+        combustible_Gastado = self.__sistema_Propulsion.gastar_combustible(tiempo)
+        self.set_combustible_Actual(combustible_Gastado) #actualizo el combustible del barco
+        '''Maia: aca tengo que actualizar los datos de la clase Viaje() que tiene el
+            combustible que se utilizó aun no le agregue este atributo porque tengo que ver
+            la mejor manera de organizarlo para que interactue con el Módulo Contable
+        '''
 
     @abstractmethod
     def descargar(self):
