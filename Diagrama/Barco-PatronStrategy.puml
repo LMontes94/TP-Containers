@@ -3,21 +3,21 @@
 title SistemaPropulsionBarco - Patron Strategy
 
 note "getNombre(){\nreturn this.nombre;}" as N1
-note "getSistemaPropulsion(){\nreturn this.sistemaPropulsion.getNombre();}\n\nmarchar(int tiempo){\nint combustibleUtilizado = this.sistemaPropulsion.activar(tiempo);\nthis.combustibleActual -= combustibleUtilizado; }" as N2
+note "getSistemaPropulsion(){\nreturn this.sistemaPropulsion.getNombre();}\n\nviajar(int tiempo){\nint combustibleUtilizado = this.sistemaPropulsion.viajar(tiempo);\nthis.combustibleActual -= combustibleUtilizado; }" as N2
 N1.. Vela
 Barco ..N2
 
 note "actualizarCombustibleUtilizado(){\ncombustibleUsado = this.combustibleInicial - this.barco.getCombustibleActual\nthis.combustibleTotalUtilizado += combustibleUsado} \n\ngetCombustibleActual(){\nreturn this.combustibleTotalUtilizado;\n\ngetHorasTotales(){\nutiliozacion del modulo GPS integrado en el barco???}}" as N3
 
-note top of Barco : -el barco se debe instanciar con una cantidad de combustible inicial\ny con un sistema de propulsion inicial\nEl barco y el viaje dependen unos de otros para poder funcionar correctamente?\ncuando instancio un barco debo instanciar un viaje no? 
+note top of Barco : -El barco y el viaje dependen unos de otros para poder funcionar correctamente?\ncuando instancio un barco debo instanciar un viaje no?
 note top of ModuloContable : -El viaje contiene un modulo contable?\n o el viaje usa un modulo contable?\nel modulo contable usa un viaje? 
-class Barco {
 
+class Barco{
+    - viaje : Viaje
     - sistemaPropulsion : SistemaPropulsion
-    - combustibleActual : float
-    + Barco(sistemaPropulsionInicial, combustibleActual)
+    - combustibleActual : 100
     + setSistemaPropulsion(sistemaPropulsion)
-    + marchar(tiempo : int)
+    + viajar(tiempo : int)
     + getCombustibleActual() : float 
     + getSistemaPropulsion() : String
 }
@@ -26,7 +26,7 @@ Barco o-- ModuloGPS
 
 interface SistemaPropulsion{
 
-    + activar(tiempo : int) : combustibleGastado
+    + viajar(tiempo : int) : combustibleGastado
     + getNombre() : String
 }
 SistemaPropulsion o-- Barco
@@ -49,6 +49,7 @@ class Viaje{
     + getHorasTotales() : int
 }
 
+Barco o-- Viaje
 class ModuloContable{
     - gananciaPorContainer = 50%;(ejemplo)
     + ModuloContable(viaje)
