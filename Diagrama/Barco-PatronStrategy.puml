@@ -22,13 +22,14 @@ class Barco{
     + getSistemaPropulsion() : String
 }
 
-Barco o-- ModuloGPS
+Viaje o-- ModuloGPS
 
 interface SistemaPropulsion{
 
-    + viajar(tiempo : int) : combustibleGastado
+    + activar(tiempo : int) : combustibleGastado
     + getNombre() : String
 }
+
 SistemaPropulsion o-- Barco
 class Vela implements SistemaPropulsion{
 
@@ -39,22 +40,30 @@ class Motor implements SistemaPropulsion{
 }
 
 class Viaje{
-    - conteinersTransportados : int
+    - sedeIncial: String
+    - sedeFinal: String
     - horasTotales : int 
-    - combustibleTotalUtilizado = 0 ;
-    - combustibleIncial : float
     + Viaje(Barco)
-    + actualizarCombustibleUtilizado()
-    + getCombustibleTotalUtilizado()
     + getHorasTotales() : int
 }
 
 Barco o-- Viaje
 class ModuloContable{
     - gananciaPorContainer = 50%;(ejemplo)
-    + ModuloContable(viaje)
+    + ModuloContable(conteiners, )
     + getGanancia() : float
 }
 
-ModuloContable --> Viaje
+'ModuloContable --> Viaje
+note as N5
+ modificar pasaje de km recorridos(distancia)
+end note
+
+note left of Barco::marchar
+  el metodo marchar lo que debe hacer es:
+    Inicia el viaje 
+    donde activa el sistema de propulsion 
+    y va calculando el combustible consumido
+    
+end note 
 @enduml

@@ -1,0 +1,55 @@
+@startuml
+
+title ** Distribución de Contenedores - Patrón Chain of Responsibility
+
+abstract class ContenedorHandler {
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+class BarcoBasico extends Barco implements ContenedorHandler {
+    - next: ContenedorHandler
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+class BarcoEspecial extends Barco implements ContenedorHandler {
+    - next: ContenedorHandler
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+abstract class Barco implements ContenedorHandler {
+    - next: ContenedorHandler
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+abstract class Contenedor {
+}
+
+class MainEmpresa {
+    - contenedorHandlers: ContenedorHandler[]
+    + distribuirContenedor(contenedor: Contenedor)
+}
+
+MainEmpresa o-- Contenedor
+MainEmpresa o-- ContenedorHandler
+
+' Notas
+
+note left of ContenedorHandler
+define los métodos para establecer el siguiente manejador en la cadena (setNext) y para manejar
+un contenedor en particular (manejar). 
+Cada tipo de barco (por ejemplo, BarcoBasico, BarcoEspecial)
+implementa esta clase abstracta y proporciona su propia
+implementación para manejar los contenedores.
+end note
+
+note right of MainEmpresa
+La clase MainEmpresa(Despacho) es la responsable de recibir un contenedor
+y distribuirlo a través de la cadena de manejadores. 
+Comienza enviando la solicitud al primer manejador, que se encargará de decidir si puede
+manejar el contenedor o pasarlo al siguiente manejador en caso contrario.
+end note
+@enduml
