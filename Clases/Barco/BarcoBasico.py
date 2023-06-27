@@ -9,8 +9,8 @@ class BarcoBasico(Barco):
     
 
 
-  def obtenerKmRecorridos(self,inicio,final):
-      kmRecorridos=GPS(inicio,final)
+  def obtenerKmRecorridos(self,viaje):
+      kmRecorridos=viaje.get_km_Recorridos()
           
       self.km_Total+=kmRecorridos 
       return kmRecorridos
