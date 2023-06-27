@@ -6,6 +6,9 @@ class BarcoBasico(Barco):
   def __init__(self):
       super().__init__()
   
+    
+
+
   def obtenerKmRecorridos(self,inicio,final):
       kmRecorridos=GPS(inicio,final)
           
