@@ -70,7 +70,7 @@ class Barco(ContenedorManejador):
     def set_viaje(self,valor):
         self.__viaje=valor
 
-    km_Total= property(get_viaje,set_viaje)    
+    viaje= property(get_viaje,set_viaje)    
     
    
    
