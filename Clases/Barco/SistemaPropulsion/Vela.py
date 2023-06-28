@@ -1,4 +1,4 @@
-from Clases.Barco.SistemaPropulsion import SistemaPropulsion
+from Clases.Barco.SistemaPropulsion.SistemaPropulsion import SistemaPropulsion
 class Vela(SistemaPropulsion):
 
     def __init__(self):

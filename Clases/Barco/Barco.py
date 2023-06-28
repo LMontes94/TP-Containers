@@ -159,7 +159,7 @@ class Barco(ContenedorManejador):
     def viajar(self):
         
         try:
-           combustible_Gastado = self.__sistema_Propulsion.gastar_combustible(self.__viaje.get_horas())
+           combustible_Gastado = self.get_sistema_Propulsion().gastar_combustible(self.__viaje.get_horas())
            self.combustible_suficiente(combustible_Gastado)
            self.set_combustible_Actual(self.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
            self.combustible_Restante()
