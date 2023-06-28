@@ -3,7 +3,7 @@ from Clases.Barco.SistemaPropulsion import SistemaPropulsion
 class Motor(SistemaPropulsion):
 
     def __init__(self):
-
+        super().__init__()
         self.__nombre = "Motor"
 
     def gastar_combustible(self, tiempo):
