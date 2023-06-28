@@ -37,7 +37,7 @@ class BarcoEspecializado(Barco):
             if self.puede_cargar_contenedor(contenedor):
                 self.cargar_conteiner(contenedor)
             elif self.noHaySiguiente():
-                self.set_siguiente().manejar(contenedor)
+                self.get_siguiente().manejar(contenedor)
         except NoHayBarcoException as e:
             print(f"Error {e.get_code()} / {e.get_mensaje()}")
 

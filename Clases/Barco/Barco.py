@@ -58,6 +58,7 @@ class Barco(ContenedorManejador):
     
     def cargar_conteiner(self,valor):
         self.__conteiner.append(valor)
+        self.peso_Actual += valor.get_peso_actual()
 
     conteiner= property(get_conteiner,cargar_conteiner)
 

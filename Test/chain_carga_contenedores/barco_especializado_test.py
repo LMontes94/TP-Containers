@@ -2,8 +2,8 @@ from unittest import TestCase
 from Clases.Contenedores.FlatRack import FlatRack
 from Clases.Barco.BarcoEspecializado import BarcoEspecializado
 from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
-from Clases.Barco.BarcoBasico import Basico 
-from Clases.Contenedores.Basico import ContenedorBasico
+from Clases.Barco.BarcoBasico import BarcoBasico 
+from Clases.Contenedores.Basico import Basico
 
 class BarcoEspecializadoTest(TestCase):
     
@@ -64,13 +64,15 @@ class BarcoEspecializadoTest(TestCase):
       barco.set_max_Peso(120000)
       barco.set_max_Containers(10)
       
-      barco1 = Basico()
+      barco1 = BarcoBasico()
       barco1.set_max_Peso(100000)
-      barco.set_max_Containers(8)
+      barco1.set_max_Containers(8)
       
-      contenedor = ContenedorBasico(1)
+      contenedor = Basico(1)
       
       barco.set_siguiente(barco1)
       barco.manejar(contenedor)
       
+      
+      self.assertIn(contenedor,barco1.get_conteiner())
       
