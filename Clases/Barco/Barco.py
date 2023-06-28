@@ -1,10 +1,11 @@
 from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Barco.SistemaPropulsion.SistemaPropulsion import SistemaPropulsion
+from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Viaje.Viaje import Viaje
 from Clases.Excepciones.NoCombustibleSuficiente import NoCombustibleSuficiente
 from abc import ABC , abstractmethod
 
-class Barco(ABC):
+class Barco(ContenedorManejador):
 
     def __init__(self):
         self.__id=''
@@ -18,6 +19,7 @@ class Barco(ABC):
         self.__combustible_Max=100
         self.__combustible_Actual = self.__combustible_Max
         self.__sistema_Propulsion = SistemaPropulsion()
+        self.siguiente = ContenedorManejador()
 
 
 #--------Getters & Setters-----------------
@@ -139,20 +141,31 @@ class Barco(ABC):
         print("::::CALCULANDO COMBUSTIBLE RESTANTE ::::::")  
         print(f"Combustible Restante: {self.get_combustible_Actual}")
 
-
-    def viajar(self):
-
-        combustible_Gastado = self.__sistema_Propulsion.gastar_combustible(self.__viaje.get_horas())
+    
+    def combustible_suficiente(self,combustible_Gastado):
         if combustible_Gastado > self.get_combustible_Actual():
             raise NoCombustibleSuficiente("No hay combustible suficiente para realizar el viaje a motor, cambiar a vela si es que se tiene una",912)  
-        self.set_combustible_Actual(self.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
-        self.combustible_Restante()
+        return True
+    
+    def viajar(self):
         
+        try:
+           combustible_Gastado = self.__sistema_Propulsion.gastar_combustible(self.__viaje.get_horas())
+           self.combustible_suficiente(combustible_Gastado)
+           self.set_combustible_Actual(self.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
+           self.combustible_Restante()
+        except NoCombustibleSuficiente as e:
+            print(f"Error {e.get_code()} / {e.get_mensaje()}")
+            
         '''Maia: aca tengo que actualizar los datos de la clase Viaje() que tiene el
             combustible que se utilizó aun no le agregue este atributo porque tengo que ver
             la mejor manera de organizarlo para que interactue con el Módulo Contable
         '''
-
+    
+    def verificar_carga_contenedor(self, contenedor):
+        contenedor.get_peso < self.get_max_Peso() and len(
+            self.get_conteiner()) < self.get_max_Containers()
+    
     @abstractmethod
     def descargar(self):
         pass
@@ -161,3 +174,4 @@ class Barco(ABC):
     def obtenerKmRecorridos(self):
         pass
 
+    
