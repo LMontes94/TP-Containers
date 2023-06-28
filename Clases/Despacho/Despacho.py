@@ -113,11 +113,11 @@ class Despacho:
         auxBarco=barcos[0]
 
         for barco in barcos:
-            if barco.km_Recorridos > auxBarco.km_Recorridos:
+            if barco.km_Total > auxBarco.km_Total:
                 auxBarco=barco
 
         
-        print(f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+        print(f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
 
 
 
@@ -130,11 +130,11 @@ class Despacho:
         auxBarco=barcos[0]
 
         for barco in barcos:
-            if barco.km_Recorridos < auxBarco.km_Recorridos:
+            if barco.km_Total < auxBarco.km_Total:
                 auxBarco=barco
 
         
-        print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+        print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
 
 
     

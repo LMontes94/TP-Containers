@@ -52,34 +52,39 @@ class DespachoTest(TestCase):
         #assert len(despacho.get_containers()) > 0
 
     def test_menorbarcoKm (self):
-          barcos=list(Barco)  
+          despacho = Despacho()  # Crear una instancia de la clase Despacho  
+    
           b=Barco()
           b.id=10
           b.max_Containers=60
           b.max_Peso=90002.0
-          b.conteiner = list (Contenedor())
-          b.sede_Inicial='AFR-002'
-          b.sede_Final='AME-003'
+          ba.conteiner = list (Contenedor())
+          b.get_viaje().set_sede_inicial('AFR-002') 
+          b.get_viaje().get_sede_final('AME-003')          
           b.km_Total=10900.0
           b.es_Especial=False
           b.peso_Actual=10980.0
+          
 
           ba=Barco()
           ba.id=10
           ba.max_Containers=90
           ba.max_Peso=12932.0
           ba.conteiner = list (Contenedor())
-          ba.sede_Inicial='AME-001'
-          ba.sede_Final='EUR-003'
+          b.get_viaje().set_sede_inicial('AFR-002') 
+          b.get_viaje().get_sede_final('AME-003')
           ba.km_Total=900200.0
           ba.es_Especial=False
           ba.peso_Actual=112980.0
 
-          barcos.append(b)
-          barcos.append(ba)  
+          despacho.agregar_barcos(b)    # Agrego los barcos a la lista
+          despacho.agregar_barcos(ba)
+
+          auxBarco=Barco()                 # creo el auxiliar donde se guardara el mayorbarcoKm
+          auxBarco=despacho.barcos[0] 
 
           
-          for barco in barcos:
+          for barco in despacho.barcos:
             if barco.km_Total < auxBarco.km_Total:
                 auxBarco=barco
 
@@ -88,36 +93,39 @@ class DespachoTest(TestCase):
         
     def test_mayorbarcoKm (self,barcos):
           
-          barcos=list(Barco)  
+          despacho = Despacho()  # Crear una instancia de la clase Despacho  
+    
           b=Barco()
           b.id=10
           b.max_Containers=60
           b.max_Peso=90002.0
+          ba.conteiner = list (Contenedor())
           b.get_viaje().set_sede_inicial('AFR-002') 
-          b.get_viaje().get_sede_final('AME-003')
+          b.get_viaje().get_sede_final('AME-003')          
           b.km_Total=10900.0
           b.es_Especial=False
           b.peso_Actual=10980.0
+          
 
           ba=Barco()
           ba.id=10
           ba.max_Containers=90
           ba.max_Peso=12932.0
           ba.conteiner = list (Contenedor())
-          ba.sede_Inicial='AME-001'
-          ba.sede_Final='EUR-003'
+          b.get_viaje().set_sede_inicial('AFR-002') 
+          b.get_viaje().get_sede_final('AME-003')
           ba.km_Total=900200.0
           ba.es_Especial=False
           ba.peso_Actual=112980.0
 
-          barcos.append(b)
-          barcos.append(ba)  
+          despacho.agregar_barcos(b)    # Agrego los barcos a la lista
+          despacho.agregar_barcos(ba)
 
-          auxBarco=Barco()                
-          auxBarco=barcos[0]
+          auxBarco=Barco()                 # creo el auxiliar donde se guardara el mayorbarcoKm
+          auxBarco=despacho.barcos[0] 
 
-          for barco in barcos:
-            if barco.km_Recorridos > auxBarco.km_Recorridos:
+          for barco in despacho.barcos:
+            if barco.km_Total > auxBarco.km_Total:
                 auxBarco=barco
 
           self.assertEqual(auxBarco,b)
