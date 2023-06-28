@@ -3,6 +3,7 @@ class Vela(SistemaPropulsion):
 
     def __init__(self):
 
+        super().__init__()
         self.__nombre = "Vela"
 
     def gastar_combustible(self, tiempo):
