@@ -55,13 +55,15 @@ class DespachoTest(TestCase):
           despacho = Despacho()  # Crear una instancia de la clase Despacho  
     
           b=Barco()
+          
           b.id=10
           b.max_Containers=60
-          b.max_Peso=90002.0
-          ba.conteiner = list (Contenedor())
+          b.set_max_Peso(90002.0)
+          b.conteiner = list (Contenedor())
           b.get_viaje().set_sede_inicial('AFR-002') 
-          b.get_viaje().get_sede_final('AME-003')          
-          b.km_Total=10900.0
+          b.get_viaje().set_sede_final('AME-003')  
+          b.get_viaje().set_km_Recorridos(10900.0)       
+          b.km_Total=b.get_viaje().get_km_Recorridos()
           b.es_Especial=False
           b.peso_Actual=10980.0
           
@@ -69,13 +71,14 @@ class DespachoTest(TestCase):
           ba=Barco()
           ba.id=10
           ba.max_Containers=90
-          ba.max_Peso=12932.0
+          ba.set_max_Peso(100000.0)
           ba.conteiner = list (Contenedor())
-          b.get_viaje().set_sede_inicial('AFR-002') 
-          b.get_viaje().get_sede_final('AME-003')
-          ba.km_Total=900200.0
+          ba.get_viaje().set_sede_inicial('AFR-002') 
+          ba.get_viaje().get_sede_final('AME-003')
+          ba.get_viaje().set_km_Recorridos(900200.0)  
+          ba.km_Total=ba.get_viaje().get_km_Recorridos()
           ba.es_Especial=False
-          ba.peso_Actual=112980.0
+          ba.peso_Actual=12980.0
 
           despacho.agregar_barcos(b)    # Agrego los barcos a la lista
           despacho.agregar_barcos(ba)
@@ -95,14 +98,15 @@ class DespachoTest(TestCase):
           
           despacho = Despacho()  # Crear una instancia de la clase Despacho  
     
-          b=Barco()
+          b=Barco()          
           b.id=10
           b.max_Containers=60
-          b.max_Peso=90002.0
-          ba.conteiner = list (Contenedor())
+          b.set_max_Peso(90002.0)
+          b.conteiner = list (Contenedor())
           b.get_viaje().set_sede_inicial('AFR-002') 
-          b.get_viaje().get_sede_final('AME-003')          
-          b.km_Total=10900.0
+          b.get_viaje().set_sede_final('AME-003')  
+          b.get_viaje().set_km_Recorridos(10900.0)       
+          b.km_Total=b.get_viaje().get_km_Recorridos()
           b.es_Especial=False
           b.peso_Actual=10980.0
           
@@ -110,14 +114,15 @@ class DespachoTest(TestCase):
           ba=Barco()
           ba.id=10
           ba.max_Containers=90
-          ba.max_Peso=12932.0
+          ba.set_max_Peso(100000.0)
           ba.conteiner = list (Contenedor())
-          b.get_viaje().set_sede_inicial('AFR-002') 
-          b.get_viaje().get_sede_final('AME-003')
-          ba.km_Total=900200.0
+          ba.get_viaje().set_sede_inicial('AFR-002') 
+          ba.get_viaje().get_sede_final('AME-003')
+          ba.get_viaje().set_km_Recorridos(900200.0)  
+          ba.km_Total=ba.get_viaje().get_km_Recorridos()
           ba.es_Especial=False
-          ba.peso_Actual=112980.0
-
+          ba.peso_Actual=12980.0
+         
           despacho.agregar_barcos(b)    # Agrego los barcos a la lista
           despacho.agregar_barcos(ba)
 
