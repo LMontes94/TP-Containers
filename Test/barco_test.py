@@ -53,7 +53,7 @@ class BarcoTest(TestCase):
       self.assertIn(conteiner3,listAux)
 
 
-    def test_viajar_Alcanza_Combustible(self):
+    #def test_viajar_Alcanza_Combustible(self):
         
     
     

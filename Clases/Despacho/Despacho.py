@@ -123,7 +123,7 @@ class Despacho:
 
 
     def menorbarcoKm (self,barcos):
-        if not barcos:
+        if  len(barcos) == 0:
             raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)   
           
         auxBarco=Barco()                

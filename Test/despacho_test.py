@@ -93,9 +93,8 @@ class DespachoTest(TestCase):
           b.id=10
           b.max_Containers=60
           b.max_Peso=90002.0
-          b.conteiner = list (Contenedor())
-          b.sede_Inicial='AFR-002'
-          b.sede_Final='AME-003'
+          b.get_viaje().set_sede_inicial('AFR-002') 
+          b.get_viaje().get_sede_final('AME-003')
           b.km_Total=10900.0
           b.es_Especial=False
           b.peso_Actual=10980.0
@@ -124,12 +123,12 @@ class DespachoTest(TestCase):
           self.assertEqual(auxBarco,b)
 
 
-    def test_No_hay_Barcos(self):    
-           
-          barcos=list(Barco)  
-          if not barcos:
-           with self.assertRaises(NoListaBarcosException):
-               barcos
+def test_No_hay_Barcos(self):
+    despacho = Despacho()  # Crear una instancia de la clase Despacho
+    
+    with self.assertRaises(NoListaBarcosException):
+        despacho.menorbarcokm(despacho.get_barcos())  # Llamar al método menorbarcokm() en la instancia de Despacho
+
               
              
                 
