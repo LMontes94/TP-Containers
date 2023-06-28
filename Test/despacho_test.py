@@ -78,18 +78,13 @@ class DespachoTest(TestCase):
           barcos.append(b)
           barcos.append(ba)  
 
-          if not barcos:
-                raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)   
           
-          auxBarco=Barco()                
-          auxBarco=barcos[0]
-
           for barco in barcos:
             if barco.km_Total < auxBarco.km_Total:
                 auxBarco=barco
 
-        
-          print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
+          self.assertEqual(auxBarco,ba)
+         
         
     def test_mayorbarcoKm (self,barcos):
           
@@ -118,8 +113,7 @@ class DespachoTest(TestCase):
 
           barcos.append(b)
           barcos.append(ba)  
-          if not barcos:
-            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)  
+
           auxBarco=Barco()                
           auxBarco=barcos[0]
 
@@ -127,5 +121,18 @@ class DespachoTest(TestCase):
             if barco.km_Recorridos > auxBarco.km_Recorridos:
                 auxBarco=barco
 
-        
-          print(f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Recorridos} kms")
+          self.assertEqual(auxBarco,b)
+
+
+    def test_No_hay_Barcos(self):    
+           
+          barcos=list(Barco)  
+          if not barcos:
+           with self.assertRaises(NoListaBarcosException):
+               barcos
+              
+             
+                
+
+
+           
