@@ -17,3 +17,4 @@ class ContenedorManejador(ABC):
     def noHaySiguiente(self):
         if self.siguiente is None:
             raise NoHayBarcoException("Ningún barco disponible!!")
+        return True

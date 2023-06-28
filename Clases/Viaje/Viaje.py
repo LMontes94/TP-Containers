@@ -5,11 +5,11 @@ class Viaje:
         self.__horas_totales = 0
         self.__km_Recorridos = 0
 
-    def __init__(self, sede_inicial, sede_final, horas,km_Recorridos):
-        self.__sede_inicial = sede_inicial
-        self.__sede_final = sede_final
-        self.__horas_totales = horas
-        self.__km_Recorridos = km_Recorridos
+    #def __init__(self, sede_inicial, sede_final, horas,km_Recorridos):
+    #    self.__sede_inicial = sede_inicial
+    #    self.__sede_final = sede_final
+    #    self.__horas_totales = horas
+    #    self.__km_Recorridos = km_Recorridos
 
     def get_sede_inicial(self):
         return self.__sede_inicial

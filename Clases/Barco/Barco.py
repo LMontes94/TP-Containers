@@ -9,17 +9,17 @@ class Barco(ContenedorManejador):
 
     def __init__(self):
         self.__id=''
-        self.__max_Containers= ''
-        self.__max_Peso=''
-        self.__conteiner = list()
+        self.__max_Containers=0.0
+        self.__max_Peso=0.0
+        self.__conteiner = [self.get_max_Containers()]
         self.__viaje = Viaje()
         self.__km_Total=0.0
         self.__es_Especial=False
         self.__peso_Actual=0.0
         self.__combustible_Max=100
         self.__combustible_Actual = self.__combustible_Max
-        self.__sistema_Propulsion = SistemaPropulsion()
-        self.siguiente = ContenedorManejador()
+        self.__sistema_Propulsion = None
+        self.__siguiente = None
 
 
 #--------Getters & Setters-----------------
@@ -47,7 +47,7 @@ class Barco(ContenedorManejador):
         return self.__max_Peso
     
     def set_max_Peso(self,valor):
-        self.__max_Containers=valor
+        self.__max_Peso=valor
 
     max_Containers= property(get_max_Peso,set_max_Peso)
 
@@ -123,6 +123,14 @@ class Barco(ContenedorManejador):
     
     def set_combustible_Actual(self, Max):
         self.__combustible_Max=Max
+        
+    def get_siguiente(self):
+        return self.__siguiente
+    
+    def set_siguiente(self, siguiente):
+        self.__siguiente = siguiente
+        
+    siguiente = property(get_siguiente,set_siguiente)
   
 #--------Getters & Setters-----------------   
 #  ...........................
@@ -163,7 +171,7 @@ class Barco(ContenedorManejador):
         '''
     
     def verificar_carga_contenedor(self, contenedor):
-        contenedor.get_peso < self.get_max_Peso() and len(
+       return contenedor.get_max_Peso() < self.get_max_Peso() and len(
             self.get_conteiner()) < self.get_max_Containers()
     
     @abstractmethod
@@ -174,4 +182,6 @@ class Barco(ContenedorManejador):
     def obtenerKmRecorridos(self):
         pass
 
-    
+    @abstractmethod
+    def manejar(self, contenedor):
+        pass

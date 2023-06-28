@@ -1,4 +1,4 @@
-class NoHayContenedoresException(Exception):
+class NoHayBarcoException(Exception):
     def __init__(self, msj):
         self.mensaje = msj
         self.code = 201

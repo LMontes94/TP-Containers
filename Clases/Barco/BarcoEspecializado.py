@@ -4,11 +4,14 @@ from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
 from abc import ABC,abstractmethod
 
 
+from Clases.Viaje.Viaje import Viaje
+
+
 class BarcoEspecializado(Barco):
      
      def __init__(self):
          super().__init__()
-         self.es_Especial=True
+         self.set_es_Especial(True)
         
 
      def obtenerKmRecorridos(self,viaje):
@@ -40,7 +43,7 @@ class BarcoEspecializado(Barco):
 
      def puede_cargar_contenedor(self, contenedor):
           if contenedor.get_es_especial():
-            return self.verificar_carga_contenedor(contenedor)
+           return self.verificar_carga_contenedor(contenedor)
 
           return False
                 
