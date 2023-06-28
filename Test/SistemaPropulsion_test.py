@@ -17,9 +17,9 @@ class SistemaPropulsion(TestCase):
         barco=BarcoBasico()
 
         barco.set_sistema_Propulsion(vela)
-        barco.get_sistema_Propulsion().gastar_combustible(tiempo)
+        resultado=barco.get_sistema_Propulsion().gastar_combustible(tiempo)
 
-        assert barco.get_sistema_Propulsion().gastar_combustible(tiempo) == 0
+        self.assertEqual(resultado,0)
 
 
     def test_gastar_combustible_Motor(self):
@@ -30,9 +30,9 @@ class SistemaPropulsion(TestCase):
         barco=BarcoBasico()
 
         barco.set_sistema_Propulsion(motor)
-        barco.get_sistema_Propulsion().gastar_combustible(tiempo)
+        resultado=barco.get_sistema_Propulsion().gastar_combustible(tiempo)
 
-        assert barco.get_sistema_Propulsion().gastar_combustible(tiempo) == 60
+        self.assertEqual(resultado,60)
 
 
 
