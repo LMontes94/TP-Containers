@@ -23,7 +23,7 @@ class Ventilado(Contenedor, ManejadorContenedores):
     def manejar(self, contenedor, mercaderia):
         try:
             self.validarCargaMercaderia(mercaderia)
-            contenedor.cargar_mercaderia(mercaderia)
+            self.cargar_mercaderia(mercaderia)
         except ContenedorLlenoException as e:
             if self.siguiente is not None:
                 self.siguiente.manejar(contenedor, mercaderia)
@@ -32,20 +32,29 @@ class Ventilado(Contenedor, ManejadorContenedores):
         except ExcesoMedidasException as e:
             if self.siguiente is not None:
                 self.siguiente.manejar(contenedor, mercaderia)
-            else:
-                raise NoHayContenedorException("No hay contenedores disponibles")
+        else:
+            raise NoHayContenedorException("No hay contenedores disponibles")
 
     #Verifica si hay alguna mercadería tóxica en el interior
-    def revisar_contenedor(self):
+    def revisar_contenedor_toxico(self):
         for mercaderia in self.get_mercaderia():
             if isinstance(mercaderia, MercaderiaToxica):
+                return True
+        return False
+    
+    #Verifica si hay alguna mercadería alimenticia en el interior
+    def revisar_contenedor_alimento(self):
+        for mercaderia in self.get_mercaderia():
+            if isinstance(mercaderia, MercaderiaAlimenticia):
                 return True
         return False
 
     #Validación según especificaciones
     def validarCargaMercaderia(self, mercaderia):
-        if isinstance(mercaderia, MercaderiaAlimenticia) and self.revisar_contenedor():
-            raise MercaderiaInvalidaException("No se puede cargar mercadería alimenticia en este tipo de contenedor.")
+        if isinstance(mercaderia, MercaderiaAlimenticia) and self.revisar_contenedor_toxico():
+            raise MercaderiaInvalidaException("No se puede cargar mercadería alimenticia si hay elementos tóxicos en el interior")
+        elif isinstance(mercaderia, MercaderiaToxica) and self.revisar_contenedor_alimento():
+            raise MercaderiaInvalidaException("No se puede cargar mercadería tóxica si hay alimentos en el interior.")
         elif self.get_hay_Espacio():
             raise ContenedorLlenoException("El contenedor está completo.")
         elif self.get_interior().alto < mercaderia.medida.alto or self.get_interior().largo < mercaderia.medida.largo:
