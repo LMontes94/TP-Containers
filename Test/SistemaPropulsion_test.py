@@ -5,6 +5,7 @@ from Clases.Barco.SistemaPropulsion.Motor import Motor
 from Clases.Barco.SistemaPropulsion.Vela import Vela
 from Clases.Barco.BarcoBasico import BarcoBasico
 from Clases.Barco.SistemaPropulsion.SistemaPropulsion import SistemaPropulsion
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 
 
 class SistemaPropulsion(TestCase):

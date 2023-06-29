@@ -3,10 +3,11 @@ from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoExceptio
 from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Excepciones.NoHayContenedorException import NoHayContenedorException
 from Clases.Excepciones.MercaderiaInvalidaException import MercaderiaInvalidaException
-import ManejadorContenedores
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 class Ventilado(Contenedor, ManejadorContenedores):
 

@@ -5,6 +5,8 @@ from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
 from Clases.Barco.BarcoBasico import BarcoBasico 
 from Clases.Contenedores.Basico import Basico
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 class BarcoEspecializadoTest(TestCase):
     

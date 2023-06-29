@@ -3,6 +3,8 @@ from Clases.Barco.SistemaPropulsion.SistemaPropulsion import SistemaPropulsion
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Viaje.Viaje import Viaje
 from Clases.Excepciones.NoCombustibleSuficiente import NoCombustibleSuficiente
+from Clases.Mercaderia.Mercaderia import Mercaderia
+
 from abc import ABC , abstractmethod
 
 class Barco(ContenedorManejador):

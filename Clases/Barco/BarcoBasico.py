@@ -2,6 +2,7 @@ from Clases.Barco.Barco import Barco
 from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 class BarcoBasico(Barco):
   

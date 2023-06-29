@@ -1,11 +1,13 @@
 from Clases.Contenedores.Contenedor import Contenedor
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
 from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Excepciones.NoHayContenedorException import NoHayContenedorException
 from Clases.Excepciones.MercaderiaInvalidaException import MercaderiaInvalidaException
-import ManejadorContenedores
+from Clases.Mercaderia.Mercaderia import Mercaderia
+
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
-from Clases.Despacho.ContenedorManejador import ContenedorManejador
+
 
 class Basico(Contenedor, ManejadorContenedores):
 

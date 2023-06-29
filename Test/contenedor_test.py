@@ -6,6 +6,7 @@ from Clases.Contenedores.BasicoHC import BasicoHC
 from Clases.Contenedores.FlatRack import FlatRack
 from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 
 class ContenedorTest(TestCase):
 

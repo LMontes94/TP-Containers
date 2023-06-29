@@ -9,7 +9,7 @@ from Clases.Barco.Barco import Barco
 from Clases.Camion.Camion import Camion
 from Clases.Excepciones.SinUnicaCargaException import SinUnicaCargaExcpetion
 from Clases.Mercaderia.Mercaderia import Mercaderia
-from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 
 class Despacho:
 

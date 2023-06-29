@@ -6,7 +6,7 @@ from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoExceptio
 from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Excepciones.SinUnicaCargaException import SinUnicaCargaExcpetion
 from Clases.Mercaderia.Mercaderia import Mercaderia
-from Clases.Despacho.ContenedorManejador import ContenedorManejador
+
 
 
 class Contenedor(ABC):

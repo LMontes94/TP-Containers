@@ -12,6 +12,8 @@ from Clases.Cliente.Cliente import Cliente
 from Clases.Barco.BarcoBasico import BarcoBasico
 from Clases.Barco.BarcoEspecializado import BarcoEspecializado
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 
 class DespachoTest(TestCase):
