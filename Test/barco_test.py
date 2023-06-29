@@ -1,5 +1,6 @@
 from unittest import TestCase 
 from unittest.mock import Mock
+from Clases.Barco.SistemaPropulsion.Motor import Motor
 from Test.GPSMock import GPSMock
 
 from Clases.Barco.BarcoBasico import BarcoBasico
@@ -18,7 +19,7 @@ from Clases.Viaje.Viaje import Viaje
 
 class BarcoTest(TestCase):
 
-    def test_obtener_Km_Recorridos(self):        
+    def test_obtener_Km_Recorridos(self):   
         barcoT=BarcoBasico()
         basico=Basico(189)
         barcoT.get_viaje().set_km_Recorridos(GPSMock().calcularDistancia(100,290))
@@ -61,8 +62,21 @@ class BarcoTest(TestCase):
       self.assertIn(conteiner3,listAux)
 
 
-    #def test_viajar_Alcanza_Combustible(self):
-        
+    def test_viajar_Alcanza_Combustible(self):
+          
+            barco=BarcoBasico()
+            basico=Basico(189)
+            barco.cargar_conteiner(basico)
+            barco.set_combustible_Actual(10000)
+            motor=Motor()
+            barco.set_sistema_Propulsion(motor)
+            barco.get_viaje().set_horas(200)
+            combustible_Gastado = barco.get_sistema_Propulsion().gastar_combustible(barco.get_viaje().get_horas)
+            barco.combustible_suficiente(combustible_Gastado)
+            barco.set_combustible_Actual(barco.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
+            barco.combustible_Restante()
+
+            self.assertEqual(barco.get_combustible_Actual(),8800)
     
     
     
