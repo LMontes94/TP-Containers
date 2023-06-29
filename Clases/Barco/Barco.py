@@ -103,7 +103,7 @@ class Barco(ContenedorManejador):
 
     #getters y setters Sistema_Propulsion
     def get_sistema_Propulsion(self):
-        return self.__sistema_Propulsion.get_nombre()
+        return self.__sistema_Propulsion
 
     def set_sistema_Propulsion(self, sistema_Propulsion):
         self.__sistema_Propulsion = sistema_Propulsion
