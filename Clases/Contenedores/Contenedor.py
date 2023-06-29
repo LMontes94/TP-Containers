@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 from Clases.Contenedores.Medida import Medida
 from Clases.Excepciones.ContenedorVacioException import ContenedorVacioException
@@ -19,7 +19,6 @@ class Contenedor(ABC):
         self.__max_volumen = 0.0
         self.__precio_base = 0.0
         self.__hay_espacio = False
-        self.__es_especial = False
         self.__mercaderia = []
         self.__peso_actual = 0.0
         self.__volumen_actual = 0.0
@@ -75,12 +74,6 @@ class Contenedor(ABC):
     def is_space(self):
         return self.__peso_actual < self.__max_peso and self.__volumen_actual < self.__max_volumen
 
-    def get_es_especial(self):
-        return self.__es_especial
-
-    def set_es_especial(self, valor):
-        self.__es_especial = valor
-
     def get_mercaderia(self):
         return self.__mercaderia
 
@@ -108,7 +101,6 @@ class Contenedor(ABC):
     pies = property(get_pies, set_pies)
     hay_espacio = property(get_hay_Espacio, is_space)
     precio_base = property(get_precio_Base, set_precio_Base)
-    es_especial = property(get_es_especial, set_es_especial)
     mercaderia = property(get_mercaderia, cargar_mercaderia)
     peso_actual = property(get_peso_actual, set_peso_actual)
     volumen_actual = property(get_peso_actual, set_peso_actual)
@@ -126,16 +118,13 @@ class Contenedor(ABC):
         for mercaderia in self.__mercaderia[1:]:
             if not primer_cargado == mercaderia:
                 return False
-                #raise SinUnicaCargaExcpetion("Este contenedor tiene diferentes mercaderia!!")
         return True
     
     def validarCargaMercaderia(self, mercaderia):
         if self.get_hay_Espacio() :
-            raise ContenedorLlenoException("El contenedor esta lleno!!")
+            raise ContenedorLlenoException("El contenedor esta completo.")
         elif self.__interior.ancho < mercaderia.medida.ancho or self.__interior.alto < mercaderia.medida.alto or self.__interior.largo < mercaderia.medida.largo:
-            raise ExcesoMedidasException(f"Las medidas de la {mercaderia.nombre} exceden el limite!!")
-        else:
-            self.cargar_mercaderia(mercaderia)
+            raise ExcesoMedidasException("Las medidas de la mercaderia exceden el limite!")
     
     def contenedor_vacio(self):
         if len(self.getContenedor().get_mercaderia()) == 0:

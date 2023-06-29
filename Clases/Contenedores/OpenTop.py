@@ -6,12 +6,14 @@ from Clases.Excepciones.MercaderiaInvalidaException import MercaderiaInvalidaExc
 import ManejadorContenedores
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 
-class FlatRack(Contenedor, ManejadorContenedores):
+class OpenTop(Contenedor, ManejadorContenedores):
+
     #Variables específicas
     def __init__(self, id):
         super().__init__(self, id, None, 230.0, 600.0, None, 230.0, 610.0)
         self.set_max_Peso(45000.0)
         self.set_max_Volumen(33.0)
+        self.precio_base = 500.0 #Precio adicional
     
     #Manejo con COR
     def manejar(self, contenedor, mercaderia):
@@ -28,7 +30,7 @@ class FlatRack(Contenedor, ManejadorContenedores):
                 self.siguiente.manejar(contenedor, mercaderia)
             else:
                 raise NoHayContenedorException("No hay contenedores disponibles")
-            
+
     #Validación según especificaciones
     def validarCargaMercaderia(self, mercaderia):
         if isinstance(mercaderia, MercaderiaAlimenticia):

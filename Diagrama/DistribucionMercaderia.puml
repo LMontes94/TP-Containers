@@ -1,14 +1,8 @@
 @startuml
 
-title ** Distrubucion de Mercaderia - Patron Chain of Responsibility **
+title **Distribución de Mercadería - Patrón Chain of Responsibility**
 
-abstract class Manejador {
-    + manejar(mercaderia: Mercaderia): void
-    + setSiguiente(manejador: Manejador): void
-}
-
-class DespachoMercaderia {
-    - siguiente: Manejador
+abstract class ManejadorMercaderia {
     + manejar(mercaderia: Mercaderia): void
     + setSiguiente(manejador: Manejador): void
 }
@@ -34,13 +28,13 @@ class OpenTop {
 }
 
 class MainEmpresa {
-    - despacho: DespachoMercaderia
+    - despacho: ManejadorMercaderia
     + distribuirMercaderia(mercaderia: Mercaderia): void
 }
 
 ' relaciones 
 
-MainEmpresa ..> DespachoMercaderia
+MainEmpresa ..> ManejadorMercaderia
 
 DespachoMercaderia --> Contenedor
 Contenedor <|-- Ventilado
