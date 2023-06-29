@@ -6,15 +6,15 @@ from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
+from Clases.Viaje.Viaje import Viaje
 
 class BarcoBasico(Barco):
   
   def __init__(self):
       super().__init__() 
 
-  def obtenerKmRecorridos(self,viaje):
-      kmRecorridos=viaje.get_km_Recorridos()
-          
+  def obtenerKmRecorridos(self):
+      kmRecorridos=self.get_viaje().get_km_Recorridos()          
       self.km_Total+=kmRecorridos 
       return kmRecorridos
 

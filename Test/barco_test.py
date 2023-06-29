@@ -13,16 +13,16 @@ from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
+from Clases.Viaje.Viaje import Viaje
 
 
 class BarcoTest(TestCase):
 
-    def test_obtener_Km_Recorridos(self):
-        gps = Mock()
-        gps.obtenerKmRecorridos.return_value = 500 
-        km_Recorridos=GPSMock().calcularDistancia(100,290)
+    def test_obtener_Km_Recorridos(self):        
         barcoT=BarcoBasico()
         basico=Basico(189)
+        barcoT.get_viaje().set_km_Recorridos(GPSMock().calcularDistancia(100,290))
+        km_Recorridos=barcoT.get_viaje().get_km_Recorridos()   
         barcoT.cargar_conteiner(basico)
         barcoT.set_km_Total(100)
 
