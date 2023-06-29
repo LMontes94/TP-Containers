@@ -125,9 +125,6 @@ class Barco(ContenedorManejador):
     # getters y setters de combustible_Max
     def get_combustible_Max(self):
         return self.__combustible_Max
-    
-    def set_combustible_Actual(self, Max):
-        self.__combustible_Max=Max
         
     def get_siguiente(self):
         return self.__siguiente
@@ -152,7 +149,7 @@ class Barco(ContenedorManejador):
 
     def combustible_Restante(self):
         print("::::CALCULANDO COMBUSTIBLE RESTANTE ::::::")  
-        print(f"Combustible Restante: {self.get_combustible_Actual}")
+        print(f"Combustible Restante: {self.get_combustible_Actual()}")
 
     
     def combustible_suficiente(self,combustible_Gastado):
@@ -165,7 +162,7 @@ class Barco(ContenedorManejador):
         try:
            combustible_Gastado = self.get_sistema_Propulsion().gastar_combustible(self.__viaje.get_horas())
            self.combustible_suficiente(combustible_Gastado)
-           self.set_combustible_Actual(self.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
+           self.set_combustible_Actual(combustible_Gastado) #actualizo el combustible del barco
            self.combustible_Restante()
         except NoCombustibleSuficiente as e:
             print(f"Error {e.get_code()} / {e.get_mensaje()}")
