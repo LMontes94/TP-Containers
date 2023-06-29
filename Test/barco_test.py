@@ -71,10 +71,10 @@ class BarcoTest(TestCase):
             motor=Motor()
             barco.set_sistema_Propulsion(motor)
             barco.get_viaje().set_horas(200)
-            combustible_Gastado = barco.get_sistema_Propulsion().gastar_combustible(barco.get_viaje().get_horas)
-            barco.combustible_suficiente(combustible_Gastado)
+            horas=barco.get_viaje().get_horas()
+            combustible_Gastado = barco.get_sistema_Propulsion().gastar_combustible(horas)
             barco.set_combustible_Actual(barco.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
-            barco.combustible_Restante()
+            
 
             self.assertEqual(barco.get_combustible_Actual(),8800)
     
