@@ -4,7 +4,9 @@ from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Viaje.Viaje import Viaje
 from Clases.Excepciones.NoCombustibleSuficiente import NoCombustibleSuficiente
 from Clases.Mercaderia.Mercaderia import Mercaderia
-
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 from abc import ABC , abstractmethod
 
 class Barco(ContenedorManejador):

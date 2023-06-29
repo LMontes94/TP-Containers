@@ -3,6 +3,9 @@ from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Mercaderia.Mercaderia import Mercaderia
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 class BarcoBasico(Barco):
   
