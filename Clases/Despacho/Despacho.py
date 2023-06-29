@@ -10,6 +10,9 @@ from Clases.Camion.Camion import Camion
 from Clases.Excepciones.SinUnicaCargaException import SinUnicaCargaExcpetion
 from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 class Despacho:
 

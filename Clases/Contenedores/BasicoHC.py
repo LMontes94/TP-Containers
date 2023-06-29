@@ -6,6 +6,8 @@ from Clases.Excepciones.NoHayContenedorException import NoHayContenedorException
 from Clases.Excepciones.MercaderiaInvalidaException import MercaderiaInvalidaException
 from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 
 class BasicoHC(Contenedor, ManejadorContenedores):

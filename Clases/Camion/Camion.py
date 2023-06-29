@@ -5,6 +5,9 @@ from Clases.Excepciones.NoMercaderiaException import NoMercaderiaException
 from Clases.Excepciones.NoPuedeCargarContenedorException import NoPuedeCargarContenedorException
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Mercaderia.Mercaderia import Mercaderia
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 class Camion:
 #Constructor

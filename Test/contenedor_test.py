@@ -7,6 +7,9 @@ from Clases.Contenedores.FlatRack import FlatRack
 from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 class ContenedorTest(TestCase):
 

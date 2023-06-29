@@ -5,8 +5,10 @@ from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Excepciones.NoHayContenedorException import NoHayContenedorException
 from Clases.Excepciones.MercaderiaInvalidaException import MercaderiaInvalidaException
 from Clases.Mercaderia.Mercaderia import Mercaderia
-from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 class FlatRack(Contenedor, ManejadorContenedores):
     #Variables específicas

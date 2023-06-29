@@ -7,6 +7,9 @@ from Clases.Contenedores.Basico import Basico
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 from Clases.Mercaderia.Mercaderia import Mercaderia
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 class BarcoEspecializadoTest(TestCase):
     

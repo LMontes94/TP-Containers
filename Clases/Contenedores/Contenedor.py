@@ -6,6 +6,9 @@ from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoExceptio
 from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Excepciones.SinUnicaCargaException import SinUnicaCargaExcpetion
 from Clases.Mercaderia.Mercaderia import Mercaderia
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 
 

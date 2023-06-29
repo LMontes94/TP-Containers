@@ -6,7 +6,6 @@ from Clases.Contenedores.BasicoHC import BasicoHC
 from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Contenedores.FlatRack import FlatRack
 from Clases.Excepciones.NoListaBarcosException import NoListaBarcosException
-from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Despacho.Despacho import Despacho
 from Clases.Cliente.Cliente import Cliente
 from Clases.Barco.BarcoBasico import BarcoBasico
@@ -14,6 +13,9 @@ from Clases.Barco.BarcoEspecializado import BarcoEspecializado
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 from Clases.Mercaderia.Mercaderia import Mercaderia
+from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
+from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
+from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 
 class DespachoTest(TestCase):

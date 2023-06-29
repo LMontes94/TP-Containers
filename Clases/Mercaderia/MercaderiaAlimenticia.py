@@ -1,4 +1,4 @@
-from Mercaderia import Mercaderia 
+from Clases.Mercaderia.Mercaderia import Mercaderia
 
 class MercaderiaAlimenticia(Mercaderia):
     def __init__(self, id, n, p, v, ancho, alto, largo):
