@@ -30,6 +30,7 @@ class Barco(ContenedorManejador):
 # --------Getters & Setters-----------------
     # getters y setters id
 
+
     def get_id(self):
         return self.__id
 
@@ -80,6 +81,7 @@ class Barco(ContenedorManejador):
 
 
 # getters y setters kmsTotal
+
 
     def get_km_Total(self):
         return self.__km_Total
@@ -154,22 +156,25 @@ class Barco(ContenedorManejador):
             f"El barco esta trabajando con el sistema de Propulsion a {self.__sistema_Propulsion.get_nombre()}")
 
     def combustible_Restante(self):
-        print("::::CALCULANDO COMBUSTIBLE RESTANTE ::::::")  
+        print("::::CALCULANDO COMBUSTIBLE RESTANTE ::::::")
         print(f"Combustible Restante: {self.get_combustible_Actual()}")
 
     def combustible_suficiente(self, combustible_Gastado):
         if combustible_Gastado > self.get_combustible_Actual():
             raise NoCombustibleSuficiente(
-                "No hay combustible suficiente para realizar el viaje a motor, cambiar a vela si es que se tiene una", 912)
+                "No hay combustible suficiente para realizar el viaje a motor, cambiar a vela si es que se tiene una")
         return True
 
     def viajar(self):
 
         try:
-           combustible_Gastado = self.get_sistema_Propulsion().gastar_combustible(self.__viaje.get_horas())
-           self.combustible_suficiente(combustible_Gastado)
-           self.set_combustible_Actual(combustible_Gastado) #actualizo el combustible del barco
-           self.combustible_Restante()
+            combustible_Gastado = self.get_sistema_Propulsion(
+            ).gastar_combustible(self.get_viaje().get_horas())
+            self.combustible_suficiente(combustible_Gastado)
+            # actualizo el combustible del barco
+            self.set_combustible_Actual(
+                self.get_combustible_Actual() - combustible_Gastado)
+            self.combustible_Restante()
         except NoCombustibleSuficiente as e:
             print(f"Error {e.get_code()} / {e.get_mensaje()}")
 
