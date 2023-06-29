@@ -14,6 +14,7 @@ from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
+
 class Despacho:
 
     MAX_CAMIONES = 5
@@ -72,8 +73,8 @@ class Despacho:
         return self.__barcos
 
     def agregar_barcos(self, valor):
-        self.__barcos.append(valor) 
-    barcos = property(get_barcos,agregar_barcos)
+        self.__barcos.append(valor)
+    barcos = property(get_barcos, agregar_barcos)
 
 # Getters & setters camiones:Lista
 
@@ -91,74 +92,75 @@ class Despacho:
 
 
     def buscarContenedor(self, contenedor):
-        pos =  self.__containers.index(contenedor)
+        pos = self.__containers.index(contenedor)
         if pos > -1:
-            return pos 
-        raise ContenedorNoEncontradoExcpetion("El contenedor no se encuentra en nuesta lista de contenedores!!")                
-        
-    def cargarContenedor(self, contenedor,cliente):
+            return pos
+        raise ContenedorNoEncontradoExcpetion(
+            "El contenedor no se encuentra en nuesta lista de contenedores!!")
+
+    def cargarContenedor(self, contenedor, cliente):
         try:
             posContenedor = self.buscarContenedor(contenedor)
             for mercaderia in cliente.mercaderia:
-                self.__containers[posContenedor].validarCargaMercaderia(mercaderia) 
+                self.__containers[posContenedor].validarCargaMercaderia(
+                    mercaderia)
+                self.__containers[posContenedor].cargar_mercaderia(
+                    mercaderia)  # Agregar la mercadería al contenedor
         except ContenedorNoEncontradoExcpetion as e:
-               print(f"Error {e.get_code()} / {e.get_mensaje}")
+            print(f"Error {e.get_code()} / {e.get_mensaje}")
         except ContenedorLlenoException as e:
-              print(f"Error {e.get_code()} / {e.get_mensaje()}")
+            print(f"Error {e.get_code()} / {e.get_mensaje()}")
         except ExcesoMedidasException as e:
-               print(f"Error {e.get_code()} / {e.get_mensaje()}")       
+            print(f"Error {e.get_code()} / {e.get_mensaje()}")
 
+    def mayorbarcoKm(self, barcos):
 
-    def mayorbarcoKm (self,barcos):
-        
         if not barcos:
-            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)  
-        auxBarco=Barco()                
-        auxBarco=barcos[0]
+            raise NoListaBarcosException(
+                "No hay una lista de barcos para realizar la operacion", 123)
+        auxBarco = Barco()
+        auxBarco = barcos[0]
 
         for barco in barcos:
             if barco.km_Total > auxBarco.km_Total:
-                auxBarco=barco
+                auxBarco = barco
 
-        
-        print(f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
+        print(
+            f"El barco que mayor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
 
+    def menorbarcoKm(self, barcos):
+        if len(barcos) == 0:
+            raise NoListaBarcosException(
+                "No hay una lista de barcos para realizar la operacion", 123)
 
-
-
-    def menorbarcoKm (self,barcos):
-        if  len(barcos) == 0:
-            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion",123)   
-          
-        auxBarco=Barco()                
-        auxBarco=barcos[0]
+        auxBarco = Barco()
+        auxBarco = barcos[0]
 
         for barco in barcos:
             if barco.km_Total < auxBarco.km_Total:
-                auxBarco=barco
+                auxBarco = barco
 
-        
-        print(f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
+        print(
+            f"El barco que menor Km Recorrio fue el barco con id: {auxBarco.id} con {auxBarco.km_Total} kms")
 
-
-    
-    def obtenerPrecio(self, container,idC,idB, distancia):
+    def obtenerPrecio(self, container, idC, idB, distancia):
         container = self.__containers[idC]
         distancia = self.__barcos[idB].get_km_Total()
 
         if not self.__barcos:
-            raise NoListaBarcosException("No hay una lista de barcos para realizar la operacion", 123)
-    
+            raise NoListaBarcosException(
+                "No hay una lista de barcos para realizar la operacion", 123)
+
         if container.hayEspacio() == False:
             precio_base = self.__calcularPrecioBase(distancia)
         else:
             peso_total = container.get_peso_actual()
             precio_base = self.__calcularPrecioBase(distancia, peso_total)
-        
-        if self.__retiro == True:
-            precio_base+=20000
 
-        return precio_base 
+        if self.__retiro == True:
+            precio_base += 20000
+
+        return precio_base
 
     def __calcularPrecioBase(self, distancia, peso_total=None):
         if distancia < 100:
@@ -167,7 +169,7 @@ class Despacho:
             else:
                 return 1000 * (peso_total // 100)
         elif distancia < 1000:
-        
+
             if peso_total is None:
                 return 210000
             else:
@@ -176,13 +178,13 @@ class Despacho:
             if peso_total is None:
                 return 230000
             else:
-             return 1150 * (peso_total // 100)
+                return 1150 * (peso_total // 100)
         else:
             if peso_total is None:
                 return 250000
             else:
                 return 1500 * (peso_total // 100)
-            
+
     def containersUnicaCarga(self):
         containers = {}
         for barco in self.__barcos:
@@ -193,22 +195,22 @@ class Despacho:
         return containers
 
     def buscarContenedorMaxKm(self, containers):
-        container_max_km = max(containers,key = containers.get)
+        container_max_km = max(containers, key=containers.get)
         return container_max_km
 
     def hayContenedoresConUnicaCarga(self, contenedores):
-        return len(contenedores) == 0 
+        return len(contenedores) == 0
 
-    def conteinerMayorViajeCompleto(self,container):
+    def conteinerMayorViajeCompleto(self, container):
 
-       try:
-          containers = self.containersUnicaCarga()
-          if self.hayContenedoresConUnicaCarga(containers):
-               max_km = self.buscarContenedorMaxKm(containers)
-          return max_km    
-       except SinUnicaCargaExcpetion as e:
-               print(f"Error {e.get_code()} / {e.get_mensaje}")
-            
+        try:
+            containers = self.containersUnicaCarga()
+            if self.hayContenedoresConUnicaCarga(containers):
+                max_km = self.buscarContenedorMaxKm(containers)
+            return max_km
+        except SinUnicaCargaExcpetion as e:
+            print(f"Error {e.get_code()} / {e.get_mensaje}")
+
     def containersUnicaCarga(self):
         containers = {}
         for barco in self.__barcos:
@@ -219,31 +221,18 @@ class Despacho:
         return containers
 
     def buscarContenedorMaxKm(self, containers):
-        container_max_km = max(containers,key = containers.get)
+        container_max_km = max(containers, key=containers.get)
         return container_max_km
 
     def hayContenedoresConUnicaCarga(self, contenedores):
-        return len(contenedores) == 0 
+        return len(contenedores) == 0
 
-    def conteinerMayorViajeCompleto(self,container):
+    def conteinerMayorViajeCompleto(self, container):
 
-       try:
-          containers = self.containersUnicaCarga()
-          if self.hayContenedoresConUnicaCarga(containers):
-               max_km = self.buscarContenedorMaxKm(containers)
-          return max_km    
-       except SinUnicaCargaExcpetion as e:
-               print(f"Error {e.get_code()} / {e.get_mensaje}")
-
-      
-
-
-
-
-
-
-
-
-
-
-
+        try:
+            containers = self.containersUnicaCarga()
+            if self.hayContenedoresConUnicaCarga(containers):
+                max_km = self.buscarContenedorMaxKm(containers)
+            return max_km
+        except SinUnicaCargaExcpetion as e:
+            print(f"Error {e.get_code()} / {e.get_mensaje}")

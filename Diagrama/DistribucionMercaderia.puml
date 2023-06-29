@@ -60,7 +60,7 @@ Además, tiene un método setSiguiente(manejador: Manejador) que establece
 el siguiente manejador en la cadena.
 end note 
 
-note top of DespachoMercaderia
+note top of Despacho
 Actúa como el punto de inicio de la Chain of Responsibility. 
 Implementa la interfaz Manejador y tiene una referencia al siguiente
 manejador en la cadena (siguiente). 

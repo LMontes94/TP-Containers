@@ -11,7 +11,6 @@ from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
 
-
 class Contenedor(ABC):
 
     def __init__(self, id, int_ancho, int_alto, int_largo, ext_ancho, ext_alto, ext_largo):
@@ -26,9 +25,9 @@ class Contenedor(ABC):
         self.__mercaderia = []
         self.__peso_actual = 0.0
         self.__volumen_actual = 0.0
+        self.__es_especial = False
 
 # ------------Getters & setters------------
-
 
     def get_id(self):
         return self.__id
@@ -97,6 +96,12 @@ class Contenedor(ABC):
     def set_volumen_actual(self, v):
         self.__volumen_actual = v
 
+    def get_es_especial(self):
+        return self.__es_especial
+
+    def set_es_especial(self, v):
+        self.__es_especial = v
+
     id = property(get_id, set_id)
     interior = property(get_interior, set_interior)
     exterior = property(get_exterior, set_exterior)
@@ -108,7 +113,7 @@ class Contenedor(ABC):
     mercaderia = property(get_mercaderia, cargar_mercaderia)
     peso_actual = property(get_peso_actual, set_peso_actual)
     volumen_actual = property(get_peso_actual, set_peso_actual)
-
+    es_especial = property(get_es_especial, set_es_especial)
 # ------------Getters & setters------------
 # ............................................
 # ------------Funciones------------
@@ -118,21 +123,23 @@ class Contenedor(ABC):
         self.__volumen_actual += mercaderia.get_volumen()
 
     def validarUnicaCarga(self):
-       if len(self.__mercaderia) > 0:
-        primer_cargado = self.__mercaderia[0]
-        for mercaderia in self.__mercaderia[1:]:
-            if not primer_cargado == mercaderia:
-                return False
-        return True
-       else:
-           return False
-    
+        if len(self.__mercaderia) > 0:
+            primer_cargado = self.__mercaderia[0]
+            for mercaderia in self.__mercaderia[1:]:
+                if not primer_cargado == mercaderia:
+                    return False
+            return True
+        else:
+            return False
+
     def validarCargaMercaderia(self, mercaderia):
-        if self.get_hay_Espacio() :
+        if self.get_hay_Espacio():
             raise ContenedorLlenoException("El contenedor esta completo.")
         elif self.__interior.ancho < mercaderia.medida.ancho or self.__interior.alto < mercaderia.medida.alto or self.__interior.largo < mercaderia.medida.largo:
-            raise ExcesoMedidasException("Las medidas de la mercaderia exceden el limite!")
-    
+            raise ExcesoMedidasException(
+                "Las medidas de la mercaderia exceden el limite!")
+
     def contenedor_vacio(self):
         if len(self.getContenedor().get_mercaderia()) == 0:
-            raise ContenedorVacioException("El conteiner no tiene mercadería para entregar.")
+            raise ContenedorVacioException(
+                "El conteiner no tiene mercadería para entregar.")

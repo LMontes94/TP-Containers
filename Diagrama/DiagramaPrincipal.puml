@@ -1,0 +1,262 @@
+@startuml
+
+title ** Diagrama Principal
+
+class Despacho{
+   - MAX_CAMIONES = 5
+   - Cliente : Cliente 
+   - retiro: boolean 
+   - conteinerCompleto: boolean  
+   - Container : Container 
+   - Barcos: ArrayList<ContenedorManejadores>
+   - Camiones: ArrayList[MAX_CAMIONES]
+   - despachador: ManejadorMercaderia
+
+   
+   + getCliente(): Cliente 
+   + setCliente(Cliente): void
+   + setRetiro(boolean): void
+   + setConteinerCompleto(boolean): void
+   + getRetiro(): boolean
+   + obtenerPrecio():
+   + conteinerMayorViajeCompleto(): Conteiner 
+   + barcoMaxKms(): Barco 
+   + barcoMinKms(): Barco 
+   + cargarBarco(Contenier): void 
+   + cargarConteiner(Mercaderia): void 
+   + distribuirMercaderia(mercaderia: Mercaderia): void
+}
+
+abstract class Barco implements ContenedorManejador {
+   - id: Integer
+   - maxConteiners: Integer
+   - maxPeso : Double 
+   - conteiner : ArrayList<Contenedor>
+   - viaje : Viaje
+   - kmTotal : Double 
+   - esEspecial: boolean 
+   - pesoActual: Double 
+   - combustibleMax : Double
+   - combustibleActual : Double
+   - sistemaPropulsion: SistemaPropulsion
+   - siguiente: ContenedorManejador
+   
+    + Barco(sistemaPropulsionInicial: SistemaPropulsion, combustibleActual: float)
+    + setSistemaPropulsion(sistemaPropulsion: SistemaPropulsion): void
+    + marchar(tiempo: int): void
+    + getCombustibleActual(): float
+    + getSistemaPropulsion(): String
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+abstract class SistemaPropulsion {
+    + gastoCombustible(): Integer
+    + activar(tiempo: int): void
+    + getNombre(): String
+}
+
+class Vela implements SistemaPropulsion {
+    - nombre: String = "Vela"
+    + gastoCombustible(): Integer
+    + activar(tiempo: int): void
+    + getNombre(): String
+}
+
+class Motor implements SistemaPropulsion {
+    - nombre: String = "Motor"
+    + gastoCombustible(): Integer
+    + activar(tiempo: int): void
+    + getNombre(): String
+}
+
+class Viaje {
+    - sedeInicial: String
+    - sedeFinal: String
+    - horasTotales: int
+    - kmRecorridos: Double 
+    + Viaje(barco: Barco)
+    + getHorasTotales(): int
+    + setHorasTotales(Int): void
+    + setKmRecorridos(Double): void
+    + getKmRecorridos(): Double 
+}
+
+class ModuloContable {
+    - gananciaPorContainer: float
+    + ModuloContable(gananciaPorContainer: float)
+    + getGanancia(contenedores: List<Container>): float
+}
+
+abstract class ContenedorManejador {
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+class BarcoBasico extends Barco implements ContenedorManejador {
+    - next: ContenedorHandler
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+class BarcoEspecial extends Barco implements ContenedorManejador {
+    - next: ContenedorHandler
+    + setNext(handler: ContenedorHandler)
+    + manejar(contenedor: Contenedor): boolean
+}
+
+class Camion{
+   - patente: String 
+   - costoFijo : double 20000 
+   - conteiner : Contenedor 
+   - ocupado: boolean 
+
+   + getPatente(): String
+   + setPatente(String): void
+   + getCostoFijo(): Double 
+   + setCostoFijo(Double): void
+   + getContenedor(): Contenedor
+   + setContenedor(Contenedor): void
+
+   + llevaConteiner(): boolean
+}
+
+class Cliente{
+   - nombre
+   - dni
+   - nroCliente 
+   - mercaderia: ArrayList<Mercaderia>
+   - servicioAPuerta: boolean 
+
+   + getNombre(): String 
+   + setNombre(String): void
+   + getDni(): Integer 
+   + setDni(Integer): void
+   + getNroCliente(): Integer 
+   + setNroCliente(Integer): void
+
+}
+
+abstract Class Contenedor{
+   - id: Integer 
+   - exterior: Medida 
+   - interior: Medida  
+   - pies: Integer 
+   - maxPeso: Double 
+   - maxVolumen: Double 
+   - precioBase: Double
+   - hayEspacio : boolean 
+   - esEspecial : boolean
+   - mercaderia: ArrayList<Mercaderia>
+   - pesoActual : Double 
+   - volumenActual: Double 
+   - cantidadCargaCompleta: Integer 
+
+   + getId(): String 
+   + setId(String): void
+   + getExterior(): Exterior
+   + setExterior(Exterior): void
+   + getInterior(): Interior
+   + getMaxPeso(): Double
+   + setMaxPeso(Double): void
+   + getMaxVolumen(): Double
+   + setMaxVolumen(Double): void 
+   + getPrecioBase(): Double
+   + setPrecioBase(Double): void
+   + getPies(): Integer 
+   + setPies(Integer): void 
+   + isEspecial(): boolean
+   + setIsEspecial(boolean): void 
+   + calcularEspacio(): 
+   + validarCargaCompletaUnica(): void 
+}
+
+abstract class ManejadorMercaderia {
+    + manejar(mercaderia: Mercaderia): void
+    + setSiguiente(manejador: Manejador): void
+}
+
+class Contenedor {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class Ventilado {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class HighCube {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class FlatRack {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+class OpenTop {
+    + manejar(mercaderia: Mercaderia): void
+}
+
+' relaciones 
+
+Despacho ..> ManejadorMercaderia
+
+Contenedor <|-- Ventilado
+Contenedor <|-- HighCube
+Contenedor <|-- FlatRack
+Contenedor <|-- OpenTop
+
+ManejadorMercaderia <|.. Contenedor
+ManejadorMercaderia <|.. Ventilado
+ManejadorMercaderia <|.. HighCube
+ManejadorMercaderia <|.. FlatRack
+ManejadorMercaderia <|.. OpenTop
+
+
+Despacho <-r- Cliente
+Despacho o-- Camion
+Despacho <-l- ContenedorManejador
+Despacho <-- ManejadorMercaderia
+
+Barco *-- SistemaPropulsion
+Barco *-- Viaje
+ModuloContable --* Despacho
+Viaje o.. GPS 
+Camion <-- Contenedor
+
+
+' notas
+
+note left of SistemaPropulsion
+Define los métodos para todos los sistemas de propulsión,
+como gastoCombustible() y activar(). 
+Las clases Vela y Motor son extenciones la clase abstracta, representando
+sistemas de propulsión específicos. 
+end note
+
+note left of Viaje::setHorasTotales
+   las horas totales las calcula el GPS 
+end note 
+
+note left of Viaje::setKmRecorridos
+   los km recorridos los calcula el GPS 
+end note 
+
+note right of ManejadorMercaderia
+Define la clase abstracta común para todos los manejadores (contenedores)
+en la Chain of Responsibility. 
+Tiene un método manejar(mercaderia: Mercaderia) que representa el punto
+de entrada para manejar una solicitud de distribución de mercadería.
+Además, tiene un método setSiguiente(manejador: Manejador) que establece
+el siguiente manejador en la cadena.
+end note 
+
+note top of Despacho
+Actúa como el punto de inicio de la Chain of Responsibility. 
+Implementa la interfaz Manejador y tiene una referencia al siguiente
+manejador en la cadena (siguiente). 
+El método manejar(mercaderia: Mercaderia) en esta clase verifica si 
+puede manejar la mercadería en base a ciertos criterios 
+(como el tipo de carga, capacidad disponible, etc.). 
+Si no puede manejarla, pasa la solicitud al siguiente manejador en la cadena.
+end note
+@enduml

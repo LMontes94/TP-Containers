@@ -10,14 +10,16 @@ from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 
+
 class FlatRack(Contenedor, ManejadorContenedores):
-    #Variables específicas
+    # Variables específicas
     def __init__(self, id):
         super().__init__(id, None, 230.0, 600.0, None, 230.0, 610.0)
         self.set_max_Peso(45000.0)
         self.set_max_Volumen(33.0)
-    
-    #Manejo con COR
+        self.set_es_especial(True)
+
+    # Manejo con COR
     def manejar(self, contenedor, mercaderia):
         try:
             self.validarCargaMercaderia(mercaderia)
@@ -26,18 +28,22 @@ class FlatRack(Contenedor, ManejadorContenedores):
             if self.siguiente is not None:
                 self.siguiente.manejar(contenedor, mercaderia)
             else:
-                raise NoHayContenedorException("No hay contenedores disponibles")
+                raise NoHayContenedorException(
+                    "No hay contenedores disponibles")
         except ExcesoMedidasException as e:
             if self.siguiente is not None:
                 self.siguiente.manejar(contenedor, mercaderia)
             else:
-                raise NoHayContenedorException("No hay contenedores disponibles")
-            
-    #Validación según especificaciones
+                raise NoHayContenedorException(
+                    "No hay contenedores disponibles")
+
+    # Validación según especificaciones
     def validarCargaMercaderia(self, mercaderia):
         if isinstance(mercaderia, MercaderiaAlimenticia):
-            raise MercaderiaInvalidaException("No se puede cargar mercadería alimenticia en este tipo de contenedor.")
+            raise MercaderiaInvalidaException(
+                "No se puede cargar mercadería alimenticia en este tipo de contenedor.")
         elif self.get_hay_Espacio():
             raise ContenedorLlenoException("El contenedor está completo.")
         elif self.get_interior().largo < mercaderia.medida.largo:
-            raise ExcesoMedidasException("Las medidas de la mercaderia exceden el límite de largo.")
+            raise ExcesoMedidasException(
+                "Las medidas de la mercaderia exceden el límite de largo.")
