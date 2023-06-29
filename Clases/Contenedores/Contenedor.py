@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from Clases.Contenedores.Medida import Medida
+from Clases.Excepciones.ContenedorVacioException import ContenedorVacioException
 from Clases.Excepciones.ContenerdorLlenoException import ContenedorLlenoException
 from Clases.Excepciones.ExcesoMedidasException import ExcesoMedidasException
 from Clases.Excepciones.SinUnicaCargaException import SinUnicaCargaExcpetion
@@ -135,4 +136,7 @@ class Contenedor(ABC):
             raise ExcesoMedidasException(f"Las medidas de la {mercaderia.nombre} exceden el limite!!")
         else:
             self.cargar_mercaderia(mercaderia)
-            
+    
+    def contenedor_vacio(self):
+        if len(self.getContenedor().get_mercaderia()) == 0:
+            raise ContenedorVacioException("El conteiner no tiene mercadería para entregar.")

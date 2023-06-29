@@ -20,7 +20,7 @@ class Despacho:
         self.__conteiner_Completo = False
         self.__containers = []
         self.__barcos = []
-        self.__camiones = []
+        self.__camiones = [self.MAX_CAMIONES]
 
 
 # ------------Getters & setters------------

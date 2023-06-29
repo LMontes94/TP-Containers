@@ -7,7 +7,8 @@ class Cliente:
         self.dni = dni
         self.nroCliente = nroCliente
         self.mercaderia = []
-        self.servicioAPuerta = False
+        self.servicioAPuerta = False    
+
     #Getters && Setters
     def getNombre(self):
         return self.nombre
@@ -33,3 +34,6 @@ class Cliente:
         return self.servicioAPuerta
     def setServicioAPuerta(self, servicioAPuerta):
         self.servicioAPuerta = servicioAPuerta
+
+    def recibirMercaderia(self,mercaderia):
+        self.agregarMercaderia(mercaderia)
