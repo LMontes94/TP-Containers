@@ -170,11 +170,7 @@ class Barco(ContenedorManejador):
         except NoCombustibleSuficiente as e:
             print(f"Error {e.get_code()} / {e.get_mensaje()}")
             
-        '''Maia: aca tengo que actualizar los datos de la clase Viaje() que tiene el
-            combustible que se utilizó aun no le agregue este atributo porque tengo que ver
-            la mejor manera de organizarlo para que interactue con el Módulo Contable
-        '''
-    
+            
     def verificar_carga_contenedor(self, contenedor):
        return contenedor.get_max_Peso() < self.get_max_Peso() and len(
             self.get_conteiner()) < self.get_max_Containers()
