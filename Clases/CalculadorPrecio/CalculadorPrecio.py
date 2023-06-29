@@ -8,6 +8,7 @@ class CalculadorPrecio:
         self.precio_conteiner_incompleto = {
             100: 1000, 1000: 1100, 9999: 1150, 10000: 1500
         }
+        self.km_base = 100
 
     def obtener_precio_container_completo(self, distancia: int) -> int:
         for d, precio in self.precio_conteiner_completo.items():
@@ -23,21 +24,17 @@ class CalculadorPrecio:
         # Si la distancia es mayor a 10000 Km
         return self.precio_conteiner_incompleto[10000]
 
-    def obtenerPrecio(self, container, idC, idB, distancia):
-        container = self.__containers[idC]
-        distancia = self.__barcos[idB].get_km_Total()
+    def obtenerPrecio(self, container, cliente, distancia):
 
-        if not self.__barcos:
-            raise NoListaBarcosException(
-                "No hay una lista de barcos para realizar la operacion", 123)
-
-        if container.hayEspacio() == False:
-            precio_base = self.__calcularPrecioBase(distancia)
+        if container.contenedor_lleno():
+            precio_base = self.obtener_precio_container_completo(distancia)
         else:
+            # o deberia buscar dentro del contenedor mercaderia del cliente e ir sumando el peso
             peso_total = container.get_peso_actual()
-            precio_base = self.__calcularPrecioBase(distancia, peso_total)
+            precio_base = self.obtener_precio_container_incompleto(distancia)
+            precio_base += (peso_total//self.km_base)
 
-        if self.__retiro == True:
+        if cliente.tieneServicioAPuerta:
             precio_base += 20000
 
         return precio_base
