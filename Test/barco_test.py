@@ -14,17 +14,19 @@ class BarcoTest(TestCase):
     def test_obtener_Km_Recorridos(self):
         gps = Mock()
         gps.obtenerKmRecorridos.return_value = 500 
-        km_Recorridos=GPSMock()
+        km_Recorridos=GPSMock().calcularDistancia(100,290)
         barcoT=BarcoBasico()
         basico=Basico(189)
         barcoT.cargar_conteiner(basico)
+        barcoT.set_km_Total(100)
 
-        #km_Recorridos=18903.9
+        
         barcoT.set_km_Total(barcoT.get_km_Total()+km_Recorridos)
+        resultado=barcoT.get_km_Total()
 
-        assert km_Recorridos > 0
+        self.assertEqual(resultado,600) 
 
-        print(f"Km recorridos {km_Recorridos}")
+        
         
     def test_descargar(self):
 
