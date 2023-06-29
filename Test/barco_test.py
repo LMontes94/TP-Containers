@@ -1,4 +1,4 @@
-from unittest import TestCase 
+from unittest import TestCase
 from unittest.mock import Mock
 from Clases.Barco.SistemaPropulsion.Motor import Motor
 from Test.GPSMock import GPSMock
@@ -19,69 +19,54 @@ from Clases.Viaje.Viaje import Viaje
 
 class BarcoTest(TestCase):
 
-    def test_obtener_Km_Recorridos(self):   
-        barcoT=BarcoBasico()
-        basico=Basico(189)
-        barcoT.get_viaje().set_km_Recorridos(GPSMock().calcularDistancia(100,290))
-        km_Recorridos=barcoT.get_viaje().get_km_Recorridos()   
+    def test_obtener_Km_Recorridos(self):
+        barcoT = BarcoBasico()
+        basico = Basico(189)
+        barcoT.get_viaje().set_km_Recorridos(GPSMock().calcularDistancia(100, 290))
+        km_Recorridos = barcoT.get_viaje().get_km_Recorridos()
         barcoT.cargar_conteiner(basico)
         barcoT.set_km_Total(100)
 
-        
         barcoT.set_km_Total(barcoT.get_km_Total()+km_Recorridos)
-        resultado=barcoT.get_km_Total()
+        resultado = barcoT.get_km_Total()
 
-        self.assertEqual(resultado,600) 
+        self.assertEqual(resultado, 600)
 
-        
-        
     def test_descargar(self):
 
-      conteiner=Basico(910)      
-      conteiner2=BasicoHC(700)   
-      conteiner3=Basico(799)     
-      
+        conteiner = Basico(910)
+        conteiner2 = BasicoHC(700)
+        conteiner3 = Basico(799)
 
-      listPrueba=list()
-      listPrueba.append(conteiner)
-      listPrueba.append(conteiner2)  
-      listPrueba.append(conteiner3)   
+        listPrueba = list()
+        listPrueba.append(conteiner)
+        listPrueba.append(conteiner2)
+        listPrueba.append(conteiner3)
 
-      listAux=list()
+        listAux = list()
 
-      while listPrueba:
-          contAux=listPrueba.pop(0)
-          listAux.append(contAux)
+        while listPrueba:
+            contAux = listPrueba.pop(0)
+            listAux.append(contAux)
 
-          
-          self.peso_Actual=0.0    
-      
-    
-      self.assertIn(conteiner,listAux)
-      self.assertIn(conteiner2,listAux)
-      self.assertIn(conteiner3,listAux)
+            self.peso_Actual = 0.0
 
+        self.assertIn(conteiner, listAux)
+        self.assertIn(conteiner2, listAux)
+        self.assertIn(conteiner3, listAux)
 
     def test_viajar_Alcanza_Combustible(self):
-          
-            barco=BarcoBasico()
-            basico=Basico(189)
-            barco.cargar_conteiner(basico)
-            barco.set_combustible_Actual(10000)
-            motor=Motor()
-            barco.set_sistema_Propulsion(motor)
-            barco.get_viaje().set_horas(200)
-            horas=barco.get_viaje().get_horas()
-            combustible_Gastado = barco.get_sistema_Propulsion().gastar_combustible(horas)
-            barco.set_combustible_Actual(barco.get_combustible_Actual()- combustible_Gastado) #actualizo el combustible del barco
-            
 
-            self.assertEqual(barco.get_combustible_Actual(),8800)
-    
-    
-    
+        barco = BarcoBasico()
+        basico = Basico(189)
+        barco.cargar_conteiner(basico)
+        barco.set_combustible_Actual(10000)
+        motor = Motor()
+        barco.set_sistema_Propulsion(motor)
+        barco.get_viaje().set_horas(200)
+        horas = barco.get_viaje().get_horas()
+        combustible_Gastado = barco.get_sistema_Propulsion().gastar_combustible(horas)
+        barco.set_combustible_Actual(barco.get_combustible_Actual(
+        ) - combustible_Gastado)  # actualizo el combustible del barco
 
-
-
-        
-
+        self.assertEqual(barco.get_combustible_Actual(), 8800)
