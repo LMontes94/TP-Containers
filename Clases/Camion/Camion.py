@@ -3,6 +3,7 @@ from Clases.Excepciones.CamionCargadoException import CamionCargadoException
 from Clases.Excepciones.ContenedorVacioException import ContenedorVacioException
 from Clases.Excepciones.NoMercaderiaException import NoMercaderiaException
 from Clases.Excepciones.NoPuedeCargarContenedorException import NoPuedeCargarContenedorException
+from Clases.Despacho.ContenedorManejador import ContenedorManejador
 
 class Camion:
 #Constructor

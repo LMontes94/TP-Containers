@@ -6,6 +6,7 @@ from Clases.Excepciones.MercaderiaInvalidaException import MercaderiaInvalidaExc
 import ManejadorContenedores
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
+from Clases.Despacho.ContenedorManejador import ContenedorManejador
 
 class Ventilado(Contenedor, ManejadorContenedores):
 

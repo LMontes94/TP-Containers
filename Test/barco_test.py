@@ -7,6 +7,7 @@ from Clases.Contenedores.Basico import Basico
 from Clases.Contenedores.BasicoHC import BasicoHC
 from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Contenedores.Medida import Medida
+from Clases.Despacho.ContenedorManejador import ContenedorManejador
 
 
 class BarcoTest(TestCase):

@@ -1,6 +1,7 @@
 from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Barco.Barco import Barco
 from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
+from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from abc import ABC,abstractmethod
 
 

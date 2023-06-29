@@ -4,6 +4,7 @@ from Clases.Barco.BarcoEspecializado import BarcoEspecializado
 from Clases.Excepciones.NoHayBarcoException import NoHayBarcoException
 from Clases.Barco.BarcoBasico import BarcoBasico 
 from Clases.Contenedores.Basico import Basico
+from Clases.Despacho.ContenedorManejador import ContenedorManejador
 
 class BarcoEspecializadoTest(TestCase):
     
