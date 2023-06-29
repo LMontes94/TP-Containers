@@ -12,6 +12,7 @@ from Clases.Cliente.Cliente import Cliente
 from Clases.Barco.BarcoBasico import BarcoBasico
 from Clases.Barco.BarcoEspecializado import BarcoEspecializado
 
+
 class DespachoTest(TestCase):
     
     def test_buscar_contenedor(self):
@@ -136,11 +137,11 @@ class DespachoTest(TestCase):
           self.assertEqual(auxBarco,b)
 
 
-def test_No_hay_Barcos(self):
-    despacho = Despacho()  # Crear una instancia de la clase Despacho
+    def test_No_hay_Barcos(self):
+        despacho = Despacho()  # Crear una instancia de la clase Despacho
     
-    with self.assertRaises(NoListaBarcosException):
-        despacho.menorbarcokm(despacho.get_barcos())  # Llamar al método menorbarcokm() en la instancia de Despacho
+        with self.assertRaises(NoListaBarcosException):
+          despacho.menorbarcoKm(despacho.get_barcos())  # Llamar al método menorbarcokm() en la instancia de Despacho
 
               
              
