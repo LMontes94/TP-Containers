@@ -118,11 +118,14 @@ class Contenedor(ABC):
         self.__volumen_actual += mercaderia.get_volumen()
 
     def validarUnicaCarga(self):
+       if len(self.__mercaderia) > 0:
         primer_cargado = self.__mercaderia[0]
         for mercaderia in self.__mercaderia[1:]:
             if not primer_cargado == mercaderia:
                 return False
         return True
+       else:
+           return False
     
     def validarCargaMercaderia(self, mercaderia):
         if self.get_hay_Espacio() :

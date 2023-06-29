@@ -13,7 +13,7 @@ from Clases.Mercaderia.MercaderiaToxica import MercaderiaToxica
 class FlatRack(Contenedor, ManejadorContenedores):
     #Variables específicas
     def __init__(self, id):
-        super().__init__(self, id, None, 230.0, 600.0, None, 230.0, 610.0)
+        super().__init__(id, None, 230.0, 600.0, None, 230.0, 610.0)
         self.set_max_Peso(45000.0)
         self.set_max_Volumen(33.0)
     
