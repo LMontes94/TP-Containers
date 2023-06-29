@@ -76,7 +76,7 @@ class ContenedorTest(TestCase):
         basico.cargar_mercaderia(mercaderia2)
         basico.cargar_mercaderia(mercaderia3)
 
-        assert basico.validarUnicaCarga()
+        assert basico.validarUnicaCarga
 
     def test_not_validar_unica_carga(self):
         basico = FlatRack(1023)
