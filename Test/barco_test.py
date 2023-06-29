@@ -80,7 +80,7 @@ class BarcoTest(TestCase):
         self.assertEqual(barco.get_combustible_Actual(),9280)
 
 
-    def no_Combustible_Suficiente(self):
+    def test_no_Combustible_Suficiente(self):
         barco=BarcoBasico()
         barco.set_combustible_Actual(1300)
         motor = Motor()
@@ -94,7 +94,7 @@ class BarcoTest(TestCase):
             barco.combustible_suficiente(combustible_Gastado)
 
 
-    def combustible_Restante(self):
+    def test_combustible_Restante(self):
         barco=BarcoBasico()
         barco.set_combustible_Actual(13000)
         motor = Motor()
@@ -104,7 +104,9 @@ class BarcoTest(TestCase):
         barco.get_viaje().set_horas(gps.calcularTiempoDeViaje())
         horas = barco.get_viaje().get_horas()
         combustible_Gastado = barco.get_sistema_Propulsion().gastar_combustible(horas)
-        resultado=barco.set_combustible_Actual(barco.get_combustible_Actual(
+        barco.set_combustible_Actual(barco.get_combustible_Actual(
         ) - combustible_Gastado)
-        
+        resultado=barco.get_combustible_Actual()
+
+
         self.assertEqual(resultado,5800)
