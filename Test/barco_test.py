@@ -22,7 +22,12 @@ class BarcoTest(TestCase):
     def test_obtener_Km_Recorridos(self):
         barcoT = BarcoBasico()
         basico = Basico(189)
-        barcoT.get_viaje().set_km_Recorridos(GPSMock().calcularDistancia(100, 290))
+        gps = Mock()
+        gps.calcularDistancia.return_value = 500  # distancia entre sede y sede en km
+        # hrs de viaje TOTALES --> probar con numero > 16 para la excepcion
+        gps.calcularTiempoDeViaje.return_value = 12
+        
+        barcoT.get_viaje().set_km_Recorridos(gps.calcularDistancia())
         km_Recorridos = barcoT.get_viaje().get_km_Recorridos()
         barcoT.cargar_conteiner(basico)
         barcoT.set_km_Total(100)
@@ -70,3 +75,5 @@ class BarcoTest(TestCase):
         ) - combustible_Gastado)  # actualizo el combustible del barco
 
         self.assertEqual(barco.get_combustible_Actual(), 8800)
+
+
