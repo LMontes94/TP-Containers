@@ -31,7 +31,7 @@ Utilizamos un mock para “hacer de GPS”. Este nos sirve para los cálculos de
 
 Nuevas peticiones:
 
-\1) Sistema de propulsión: Vela y Motor, afectan el gasto de combustible En grupo planteamos utilizar el Patrón State\. La Interfaz State seria nuestro Sistema de Propulsion, los estados concretos son Vela y Motor, y el contexto es el Barco\.
+Sistema de propulsión: Vela y Motor, afectan el gasto de combustible En grupo planteamos utilizar el Patrón State\. La Interfaz State seria nuestro Sistema de Propulsion, los estados concretos son Vela y Motor, y el contexto es el Barco\.
 
 Este patrón nos sirve dado que en tiempo de ejecución debemos cambiar el sistema de propulsion de nuestro barco, afectando el gasto de combustible.
 
@@ -39,7 +39,7 @@ Vela: no gasta combustible cuando se utiliza Motor: gasta 6 litros de combustibl
 
 Implementación del patrón :
 
-![](Test/diag_sistema_prop.png)
+![Sistema Propulsion](img/diag_sistema_prop.jpeg)
 
 **Modulo Contable :**
 
@@ -52,13 +52,13 @@ Para resolverlo planteamos crear una clase Viaje, la misma tendrá información 
 - Duración del viaje medido en horas
 - Kilómetros recorridos
 
-![](Test/diag_viaje.jpeg)
+![](img/diag_viaje.jpeg)
 
 Es importante aclarar que tanto el viaje como el módulo darán resultados correctos si se ejecutan los métodos en el momento correcto, dado que en el caso de no actualizar el combustible total al final de cada viaje y pasar ese objeto Viaje(sin actualizar) al Módulo Contable éste dará falsos resultados, ya que no se registró de forma correcta el uso del combustible en ese viaje.
 
 Antes de pasar el objeto Viaje al Módulo Contable, se debe estar seguro de que ese objeto (o sea Viaje) tiene los datos actualizados
 
-![](Test/diag_modulo_cont.png)
+![](img/diag_modulo_cont.png)
 
 **Distribución de la Mercadería**
 
@@ -66,10 +66,10 @@ En la nueva versión del trabajo, se nos plantean nuevas reglas en relación a l
 
 Decidimos que la mejor manera de manipular la mercadería sería a través del patrón Chains of Responsibility. El patrón está compuesto por los diferentes tipos de Contenedores, estos tendrán las validaciones necesarias para ver si pueden llevar o no al producto (teniendo en cuenta las medidas, el tipo de mercadería, si está completo, etc…) y contamos con un manejador que es la interfaz que lleva el patrón.
 
-![](Test/diag_cor_mercaderia.png)
+![](img/diag_cor_mercaderia.png)
 
 **Distribución de los contenedores en los barcos**
 
 Teniendo en cuenta que teníamos dos tipos de barcos, elegimos usar nuevamente el patrón Chains of Responsibility para controlar el manejo de a dónde entra cada contenedor. Seguimos la misma lógica de tener un manejador y las clases que lo implementan.
 
-![](Test/diag_cor_contenedores.png)
+![](img/diag_cor_contenedores.png)
