@@ -24,7 +24,7 @@ class CalculadorPrecio:
         # Si la distancia es mayor a 10000 Km
         return self.precio_conteiner_incompleto[10000]
 
-    def obtenerPrecio(self, container, cliente, distancia):
+    def calcularPrecio(self, container, cliente, distancia):
 
         if container.contenedor_lleno():
             precio_base = self.obtener_precio_container_completo(distancia)
