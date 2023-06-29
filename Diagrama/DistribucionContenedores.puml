@@ -2,24 +2,24 @@
 
 title ** Distribución de Contenedores - Patrón Chain of Responsibility
 
-abstract class ContenedorHandler {
-    + setNext(handler: ContenedorHandler)
+abstract class ContenedorManejador {
+    + setNext(handler: ContenedorManejador)
     + manejar(contenedor: Contenedor): boolean
 }
 
-class BarcoBasico extends Barco implements ContenedorHandler {
+class BarcoBasico extends Barco implements ContenedorManejador {
     - next: ContenedorHandler
     + setNext(handler: ContenedorHandler)
     + manejar(contenedor: Contenedor): boolean
 }
 
-class BarcoEspecial extends Barco implements ContenedorHandler {
+class BarcoEspecial extends Barco implements ContenedorManejador {
     - next: ContenedorHandler
     + setNext(handler: ContenedorHandler)
     + manejar(contenedor: Contenedor): boolean
 }
 
-abstract class Barco implements ContenedorHandler {
+abstract class Barco implements ContenedorManejador {
     - next: ContenedorHandler
     + setNext(handler: ContenedorHandler)
     + manejar(contenedor: Contenedor): boolean
@@ -29,16 +29,16 @@ abstract class Contenedor {
 }
 
 class MainEmpresa {
-    - contenedorHandlers: ContenedorHandler[]
+    - contenedorHandlers: ContenedorManejador[]
     + distribuirContenedor(contenedor: Contenedor)
 }
 
 MainEmpresa o-- Contenedor
-MainEmpresa o-- ContenedorHandler
+MainEmpresa o-- ContenedorManejador
 
 ' Notas
 
-note left of ContenedorHandler
+note left of ContenedorManejador
 define los métodos para establecer el siguiente manejador en la cadena (setNext) y para manejar
 un contenedor en particular (manejar). 
 Cada tipo de barco (por ejemplo, BarcoBasico, BarcoEspecial)

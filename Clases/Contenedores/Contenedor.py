@@ -143,3 +143,6 @@ class Contenedor(ABC):
         if len(self.getContenedor().get_mercaderia()) == 0:
             raise ContenedorVacioException(
                 "El conteiner no tiene mercadería para entregar.")
+
+    def contenedor_lleno(self):
+        return self.get_peso_actual() == self.get_max_Peso()
