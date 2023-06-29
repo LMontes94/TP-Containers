@@ -55,12 +55,11 @@ class DespachoTest(TestCase):
     def test_menorbarcoKm (self):
           despacho = Despacho()  # Crear una instancia de la clase Despacho  
     
-          b=Barco()
+          b=BarcoBasico()
           
           b.id=10
           b.max_Containers=60
           b.set_max_Peso(90002.0)
-          b.conteiner = list (Contenedor())
           b.get_viaje().set_sede_inicial('AFR-002') 
           b.get_viaje().set_sede_final('AME-003')  
           b.get_viaje().set_km_Recorridos(10900.0)       
@@ -69,13 +68,12 @@ class DespachoTest(TestCase):
           b.peso_Actual=10980.0
           
 
-          ba=Barco()
+          ba=BarcoBasico()
           ba.id=10
           ba.max_Containers=90
           ba.set_max_Peso(100000.0)
-          ba.conteiner = list (Contenedor())
           ba.get_viaje().set_sede_inicial('AFR-002') 
-          ba.get_viaje().get_sede_final('AME-003')
+          ba.get_viaje().set_sede_final('AME-003')
           ba.get_viaje().set_km_Recorridos(900200.0)  
           ba.km_Total=ba.get_viaje().get_km_Recorridos()
           ba.es_Especial=False
@@ -84,26 +82,25 @@ class DespachoTest(TestCase):
           despacho.agregar_barcos(b)    # Agrego los barcos a la lista
           despacho.agregar_barcos(ba)
 
-          auxBarco=Barco()                 # creo el auxiliar donde se guardara el mayorbarcoKm
+          auxBarco=BarcoBasico()                 # creo el auxiliar donde se guardara el mayorbarcoKm
           auxBarco=despacho.barcos[0] 
 
           
-          for barco in despacho.barcos:
+          for barco in despacho.get_barcos():
             if barco.km_Total < auxBarco.km_Total:
                 auxBarco=barco
 
-          self.assertEqual(auxBarco,ba)
+          self.assertEqual(auxBarco,b)
          
         
-    def test_mayorbarcoKm (self,barcos):
+    def test_mayorbarcoKm (self):
           
           despacho = Despacho()  # Crear una instancia de la clase Despacho  
     
-          b=Barco()          
+          b=BarcoBasico()          
           b.id=10
           b.max_Containers=60
-          b.set_max_Peso(90002.0)
-          b.conteiner = list (Contenedor())
+          b.set_max_Peso(90002.0)          
           b.get_viaje().set_sede_inicial('AFR-002') 
           b.get_viaje().set_sede_final('AME-003')  
           b.get_viaje().set_km_Recorridos(10900.0)       
@@ -112,13 +109,12 @@ class DespachoTest(TestCase):
           b.peso_Actual=10980.0
           
 
-          ba=Barco()
+          ba=BarcoBasico()
           ba.id=10
           ba.max_Containers=90
           ba.set_max_Peso(100000.0)
-          ba.conteiner = list (Contenedor())
           ba.get_viaje().set_sede_inicial('AFR-002') 
-          ba.get_viaje().get_sede_final('AME-003')
+          ba.get_viaje().set_sede_final('AME-003')
           ba.get_viaje().set_km_Recorridos(900200.0)  
           ba.km_Total=ba.get_viaje().get_km_Recorridos()
           ba.es_Especial=False
@@ -127,14 +123,16 @@ class DespachoTest(TestCase):
           despacho.agregar_barcos(b)    # Agrego los barcos a la lista
           despacho.agregar_barcos(ba)
 
-          auxBarco=Barco()                 # creo el auxiliar donde se guardara el mayorbarcoKm
+          auxBarco=BarcoBasico()                 # creo el auxiliar donde se guardara el mayorbarcoKm
           auxBarco=despacho.barcos[0] 
 
-          for barco in despacho.barcos:
+          
+
+          for barco in despacho.get_barcos():
             if barco.km_Total > auxBarco.km_Total:
                 auxBarco=barco
 
-          self.assertEqual(auxBarco,b)
+          self.assertEqual(auxBarco,ba)
 
 
     def test_No_hay_Barcos(self):
