@@ -23,15 +23,15 @@ class SistemaPropulsion(TestCase):
 
 
     def test_gastar_combustible_Motor(self):
+        
+        motor = Motor()
+        tiempo = 10
 
-        motor=Motor()
-        tiempo=10
-
-        barco=BarcoBasico()
-
+        barco = BarcoBasico()
         barco.set_sistema_Propulsion(motor)
-        resultado=barco.get_sistema_Propulsion().gastar_combustible(tiempo)
 
+        resultado = barco.get_sistema_Propulsion().gastar_combustible(tiempo)
+        
         self.assertEqual(resultado,60)
 
 
