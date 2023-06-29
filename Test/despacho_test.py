@@ -5,11 +5,12 @@ from Clases.Contenedores.Basico import Basico
 from Clases.Contenedores.BasicoHC import BasicoHC
 from Clases.Contenedores.Contenedor import Contenedor
 from Clases.Contenedores.FlatRack import FlatRack
+from Clases.Contenedores.OpenTop import OpenTop
+from Clases.Contenedores.Ventilado import Ventilado
 from Clases.Excepciones.NoListaBarcosException import NoListaBarcosException
 from Clases.Despacho.Despacho import Despacho
 from Clases.Cliente.Cliente import Cliente
 from Clases.Barco.BarcoBasico import BarcoBasico
-from Clases.Barco.BarcoEspecializado import BarcoEspecializado
 from Clases.Despacho.ContenedorManejador import ContenedorManejador
 from Clases.Contenedores.ManejadorContenedores import ManejadorContenedores
 from Clases.Mercaderia.Mercaderia import Mercaderia
@@ -37,25 +38,34 @@ class DespachoTest(TestCase):
         basico = Basico(103)
         basicoHC = BasicoHC(1055)
         flatrack = FlatRack(203)
+        open_top= OpenTop(675)
+        ventilado = Ventilado(785)
         
         despacho.agregar_container(basico)
         despacho.agregar_container(basicoHC)
         despacho.agregar_container(flatrack)
+        despacho.agregar_container(open_top)
+        despacho.agregar_container(ventilado)
         
         mercaderia1 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
         mercaderia2 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
         mercaderia3 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
+        mercaderia4 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
+        mercaderia5 = Mercaderia(102,"Silla",3.0,5.0,1.0,2.0,5.0)
         
         cliente = Cliente("Lucas",38211156,102365)
         cliente.agregarMercaderia(mercaderia1)
         cliente.agregarMercaderia(mercaderia2)
         cliente.agregarMercaderia(mercaderia3)
+        cliente.agregarMercaderia(mercaderia4)
+        cliente.agregarMercaderia(mercaderia5)
         
         despacho.cargarContenedor(basico,cliente)
         self.assertIn(mercaderia1, basico.mercaderia)
         self.assertIn(mercaderia2, basico.mercaderia)
         self.assertIn(mercaderia3, basico.mercaderia)
-        #assert len(despacho.get_containers()) > 0
+        self.assertIn(mercaderia4, basico.mercaderia)
+        self.assertIn(mercaderia5, basico.mercaderia)
 
     def test_menorbarcoKm (self):
           despacho = Despacho()  # Crear una instancia de la clase Despacho  

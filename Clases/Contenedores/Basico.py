@@ -25,7 +25,7 @@ class Basico(Contenedor, ManejadorContenedores):
     def manejar(self, mercaderia, contenedor):
         try:
             self.validarCargaMercaderia(mercaderia)
-            contenedor.cargar_mercaderia(mercaderia)
+            self.cargar_mercaderia(mercaderia)
         except ContenedorLlenoException as e:
             if self.siguiente is not None:
                 self.siguiente.manejar(contenedor, mercaderia)
@@ -43,5 +43,5 @@ class Basico(Contenedor, ManejadorContenedores):
             raise MercaderiaInvalidaException("No se puede cargar mercadería alimenticia en este tipo de contenedor.")
         elif self.get_hay_Espacio():
             raise ContenedorLlenoException("El contenedor está completo.")
-        elif self.get_interior().alto < mercaderia.medida.alto or self.get_interior().largo < mercaderia.medida.largo:
+        elif self.get_interior().alto < mercaderia.medida.get_alto() or self.get_interior().largo < mercaderia.medida.get_largo():
             raise ExcesoMedidasException("Las medidas de la mercadería exceden el límite.")
