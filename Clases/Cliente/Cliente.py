@@ -1,3 +1,4 @@
+from Clases.Excepciones.NoMercaderiaException import NoMercaderiaException
 from Clases.Mercaderia.Mercaderia import Mercaderia
 from Clases.Mercaderia.MercaderiaAlimenticia import MercaderiaAlimenticia
 from Clases.Mercaderia.MercaderiaNormal import MercaderiaNormal
@@ -40,3 +41,9 @@ class Cliente:
 
     def recibirMercaderia(self,mercaderia):
         self.agregarMercaderia(mercaderia)
+
+    def descargarMercaderia(self):
+       if len(self.mercaderia) == 0:
+          raise NoMercaderiaException("No hay mas mercaderia por dejar!!")
+       return self.mercaderia.pop(0)
+       

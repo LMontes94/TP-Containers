@@ -25,16 +25,16 @@ class CalculadorPrecio:
         return self.precio_conteiner_incompleto[10000]
 
     def calcularPrecio(self, container, cliente, distancia):
-
+        precio_base = 0.0
         if container.contenedor_lleno():
             precio_base = self.obtener_precio_container_completo(distancia)
         else:
             # o deberia buscar dentro del contenedor mercaderia del cliente e ir sumando el peso
             peso_total = container.get_peso_actual()
             precio_base = self.obtener_precio_container_incompleto(distancia)
-            precio_base += (peso_total//self.km_base)
+            precio_base += ((peso_total/self.km_base)*precio_base)
 
-        if cliente.tieneServicioAPuerta:
+        if cliente.tieneServicioAPuerta():
             precio_base += 20000
 
         return precio_base
